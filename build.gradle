@@ -50,6 +50,5 @@ bootJar {
 }
 
 bootRun {
-	systemProperties = System.properties
-	jvmArgs=["-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5050"]
+	 systemProperties = System.properties
 }

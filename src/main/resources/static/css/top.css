@@ -1,0 +1,127 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  min-height: 100vh;
+  background: #fff;
+}
+
+header {
+  height: 80px;
+  background: #1B5678;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header button {
+  width: 90px;
+  height: 40px;
+  background: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+main {
+  width: 900px;
+  margin: 0 auto;
+  padding-top: 70px;
+}
+
+.profile-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.profile-left {
+  text-align: center;
+}
+
+.profile-image {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.profile-left p {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.profile-right {
+  width: 360px;
+}
+
+.profile-right h2,
+.chart-section h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.line {
+  width: 260px;
+  border-bottom: 1px solid #999;
+  margin: 14px auto 24px;
+}
+
+.profile-right p {
+  font-size: 15px;
+  line-height: 1.9;
+  text-align: left;
+}
+
+.edit-button {
+  width: 200px;
+  height: 46px;
+  background: #1B5678;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  display: block;
+  margin: 24px auto 0;
+}
+
+.chart-section {
+  text-align: center;
+  margin-top: 90px;
+}
+
+.chart-line {
+  width: 330px;
+  margin-bottom: 30px;
+}
+
+.chart-area {
+  width: 720px;
+  height: 330px;
+  margin: 45px auto 80px;
+  border: 1px solid #eee;
+  color: #555;
+  font-size: 12px;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
+footer {
+  height: 40px;
+  background: #1B5678;
+  color: white;
+  text-align: center;
+  line-height: 40px;
+  font-size: 14px;
+}
