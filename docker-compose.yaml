@@ -8,8 +8,7 @@ services:
       - 8080:8080
       - 5050:5050
     tty: true
-    volumes:
-      - ./:/app
+   
     depends_on:
       - db
 
