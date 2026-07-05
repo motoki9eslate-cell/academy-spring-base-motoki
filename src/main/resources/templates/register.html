@@ -13,18 +13,21 @@
   <main>
     <h2>新規登録</h2>
 
-    <form class="register-form">
-      <label>氏名</label>
-      <input type="text" placeholder="アカデミー花子">
+    <form class="register-form" action="/register" method="post">
+  <label>氏名</label>
+  <input type="text" name="name" placeholder="アカデミー花子" required maxlength="255">
+  <p class="error-message">氏名は必ず入力してください</p>
 
-      <label>メールアドレス</label>
-      <input type="email" placeholder="tatsuya.yokokura@prum.jp">
+  <label>メールアドレス</label>
+  <input type="email" name="email" placeholder="tatsuya.yokokura@prum.jp" required>
+  <p class="error-message">メールアドレスが正しい形式ではありません</p>
 
-      <label>パスワード</label>
-      <input type="password" placeholder="パスワード">
+  <label>パスワード</label>
+  <input type="password" name="password" placeholder="パスワード" required minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d).{8,}$">
+  <p class="error-message">英数字8文字以上で入力してください</p>
 
-      <button class="submit-button" type="submit">登録する</button>
-    </form>
+  <button class="submit-button" type="submit">登録する</button>
+</form>
   </main>
   <footer>
   portfolio site
