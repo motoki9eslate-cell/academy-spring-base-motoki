@@ -30,9 +30,8 @@ header button {
 }
 
 main {
-  width: 900px;
-  margin: 0 auto;
-  padding-top: 70px;
+   padding-top: 80px;
+    min-height: calc(100vh - 120px);
 }
 
 .profile-section {
@@ -96,6 +95,15 @@ main {
   margin: 24px auto 0;
 }
 
+.edit-button {
+    background: #2d5d7b;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .chart-section {
   text-align: center;
   margin-top: 90px;
@@ -124,4 +132,55 @@ footer {
   text-align: center;
   line-height: 40px;
   font-size: 14px;
+}
+
+/* 新規登録フォーム */
+.register-form {
+  width: 420px;
+  margin: 0 auto 80px;
+}
+
+.register-form label {
+  display: block;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.submit-button {
+  display: block;
+  width: 220px;
+   margin: 40px auto 80px;  /* ← 下に80px余白 */
+  padding: 12px;
+  background: #1b5b78;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error-message {
+     width: 420px;
+    margin: 0 auto 24px;
+    color: red;
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.page-title{
+    text-align: center;
+    font-size: 40px;   /* 56px → 48px */
+    font-weight: 300;
+    color: #555;
+    margin: 40px 0 60px;
 }
