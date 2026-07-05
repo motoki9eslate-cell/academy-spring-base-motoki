@@ -134,6 +134,15 @@ main h2 {
   border-radius: 3px;
 }
 
+.edit-button {
+    background: #2d5d7b;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .chart-section {
   text-align: center;
   margin-top: 90px;
