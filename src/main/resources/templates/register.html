@@ -15,18 +15,27 @@
 
    <form class="register-form" action="/register" method="post">
 
-    <div class="error-message" th:if="${errors}">
-        <p th:each="error : ${errors}" th:text="${error}"></p>
-    </div>
-
     <label>氏名</label>
     <input type="text" name="name" placeholder="アカデミー花子">
+    <p class="error-message"
+   th:if="${errors != null and #lists.contains(errors,'氏名を入力してください')}"
+   th:text="'氏名を入力してください'"></p>
+
+<p class="error-message"
+   th:if="${errors != null and #lists.contains(errors,'氏名は256文字以内で入力してください')}"
+   th:text="'氏名は256文字以内で入力してください'"></p>
 
     <label>メールアドレス</label>
     <input type="email" name="email" placeholder="tatsuya.yokokura@prum.jp">
+    <p class="error-message"
+   th:if="${errors != null and #lists.contains(errors,'メールアドレスを入力してください')}"
+   th:text="'メールアドレスを入力してください'"></p>
 
     <label>パスワード</label>
     <input type="password" name="password" placeholder="パスワード">
+    <p class="error-message"
+   th:if="${errors != null and #lists.contains(errors,'パスワードを入力してください')}"
+   th:text="'パスワードを入力してください'"></p>
 
     <button class="submit-button" type="submit">登録する</button>
 </form>

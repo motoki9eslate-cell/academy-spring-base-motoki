@@ -46,9 +46,7 @@ public String registerPost(
     if (password.isBlank()) errors.add("パスワードを入力してください");
 
     if (name.length() > 256) errors.add("氏名は256文字以内で入力してください");
-    if (email.length() > 256) errors.add("メールアドレスは256文字以内で入力してください");
-    if (password.length() > 256) errors.add("パスワードは256文字以内で入力してください");
-
+   
     if (!errors.isEmpty()) {
         model.addAttribute("errors", errors);
         return "register";
