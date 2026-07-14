@@ -95,15 +95,6 @@ main {
   margin: 24px auto 0;
 }
 
-.edit-button {
-    background: #2d5d7b;
-    color: white;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .chart-section {
   text-align: center;
   margin-top: 90px;
@@ -169,11 +160,11 @@ footer {
 }
 
 .error-message {
-     width: 420px;
-    margin: 0 auto 24px;
+     width: 100%;
+    margin: 4px 0 16px;
     color: red;
     font-size: 15px;
-    line-height: 1.8;
+    line-height: 1.5;
     text-align: left;
 }
 

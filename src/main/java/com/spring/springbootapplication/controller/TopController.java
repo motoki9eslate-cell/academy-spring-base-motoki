@@ -31,7 +31,6 @@ public class TopController {
         return "register";
     }
 
-
     @PostMapping("/register")
 public String registerPost(
         @RequestParam String name,
@@ -41,12 +40,36 @@ public String registerPost(
 ) {
     List<String> errors = new ArrayList<>();
 
-    if (name.isBlank()) errors.add("氏名を入力してください");
-    if (email.isBlank()) errors.add("メールアドレスを入力してください");
-    if (password.isBlank()) errors.add("パスワードを入力してください");
+    // 入力された内容を、エラー後も画面に残す
+    model.addAttribute("name", name);
+    model.addAttribute("email", email);
 
-    if (name.length() > 256) errors.add("氏名は256文字以内で入力してください");
-   
+    // 氏名
+    if (name.isBlank()) {
+        errors.add("氏名を入力してください");
+    } else if (name.length() > 256) {
+        errors.add("氏名は256文字以内で入力してください");
+    }
+
+    // メールアドレス
+    if (email.isBlank()) {
+        errors.add("メールアドレスを入力してください");
+    } else if (!email.matches(
+            "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+    )) {
+        errors.add("正しいメールアドレスを入力してください");
+    }
+
+    // パスワード
+    if (password.isBlank()) {
+        errors.add("パスワードを入力してください");
+    } else if (!password.matches(
+            "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,}$"
+    )) {
+        errors.add("パスワードは英数8文字以上で入力してください");
+    }
+
+    // 1つでもエラーがあれば登録せず、新規登録画面を再表示する
     if (!errors.isEmpty()) {
         model.addAttribute("errors", errors);
         return "register";
@@ -57,8 +80,8 @@ public String registerPost(
 
     jdbcTemplate.update(
             "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-            name,
-            email,
+            name.trim(),
+            email.trim(),
             hashedPassword
     );
 

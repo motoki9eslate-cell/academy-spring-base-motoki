@@ -1,47 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="/css/top.css">
   <title>新規登録</title>
 </head>
+
 <body>
   <header>
     <h1>My Portfolio</h1>
-    <button>ログイン</button>
+    <button type="button">ログイン</button>
   </header>
 
   <main>
-     <h2 class="page-title">新規登録</h2>
+    <h2 class="page-title">新規登録</h2>
 
-   <form class="register-form" action="/register" method="post" novalidate>
+    <form
+        class="register-form"
+        action="/register"
+        method="post"
+        novalidate
+    >
 
-    <label>氏名</label>
-    <input type="text" name="name" placeholder="アカデミー花子">
-    <p class="error-message"
-   th:if="${errors != null and #lists.contains(errors,'氏名を入力してください')}"
-   th:text="'氏名を入力してください'"></p>
+      <label for="name">氏名</label>
+      <input
+          id="name"
+          type="text"
+          name="name"
+          placeholder="アカデミー花子"
+          th:value="${name}"
+      >
 
-<p class="error-message"
-   th:if="${errors != null and #lists.contains(errors,'氏名は256文字以内で入力してください')}"
-   th:text="'氏名は256文字以内で入力してください'"></p>
+      <p
+          class="error-message"
+          th:if="${errors != null
+              and #lists.contains(errors, '氏名を入力してください')}"
+          th:text="'氏名を入力してください'"
+      ></p>
 
-    <label>メールアドレス</label>
-    <input type="email" name="email" placeholder="tatsuya.yokokura@prum.jp">
-    <p class="error-message"
-   th:if="${errors != null and #lists.contains(errors,'メールアドレスを入力してください')}"
-   th:text="'メールアドレスを入力してください'"></p>
+      <p
+          class="error-message"
+          th:if="${errors != null
+              and #lists.contains(
+                  errors,
+                  '氏名は256文字以内で入力してください'
+              )}"
+          th:text="'氏名は256文字以内で入力してください'"
+      ></p>
 
-    <label>パスワード</label>
-    <input type="password" name="password" placeholder="パスワード">
-    <p class="error-message"
-   th:if="${errors != null and #lists.contains(errors,'パスワードを入力してください')}"
-   th:text="'パスワードを入力してください'"></p>
 
-    <button class="submit-button" type="submit">登録する</button>
-</form>
+      <label for="email">メールアドレス</label>
+      <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="tatsuya.yokokura@prum.jp"
+          th:value="${email}"
+      >
+
+      <p
+          class="error-message"
+          th:if="${errors != null
+              and #lists.contains(
+                  errors,
+                  'メールアドレスを入力してください'
+              )}"
+          th:text="'メールアドレスを入力してください'"
+      ></p>
+
+      <p
+          class="error-message"
+          th:if="${errors != null
+              and #lists.contains(
+                  errors,
+                  '正しいメールアドレスを入力してください'
+              )}"
+          th:text="'正しいメールアドレスを入力してください'"
+      ></p>
+
+
+      <label for="password">パスワード</label>
+      <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="パスワード"
+      >
+
+      <p
+          class="error-message"
+          th:if="${errors != null
+              and #lists.contains(
+                  errors,
+                  'パスワードを入力してください'
+              )}"
+          th:text="'パスワードを入力してください'"
+      ></p>
+
+      <p
+          class="error-message"
+          th:if="${errors != null
+              and #lists.contains(
+                  errors,
+                  'パスワードは英数8文字以上で入力してください'
+              )}"
+          th:text="'パスワードは英数8文字以上で入力してください'"
+      ></p>
+
+      <button class="submit-button" type="submit">
+        登録する
+      </button>
+    </form>
   </main>
+
   <footer>
-  portfolio site
-</footer>
+    portfolio site
+  </footer>
 </body>
 </html>
