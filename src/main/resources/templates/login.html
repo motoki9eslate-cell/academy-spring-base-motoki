@@ -2,62 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/top.css">
-    <title>ログイン</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/top.css">
+  <title>ログイン</title>
 </head>
 
 <body class="login-page">
 
-<header>
+  <header>
     <h1>My Portfolio</h1>
-</header>
+  </header>
 
-<main>
+  <main>
+    <h2 class="page-title">ログイン</h2>
 
-    <h1>ログイン</h1>
+    <form
+        class="login-form"
+        action="/login"
+        method="post"
+        novalidate
+    >
 
-    <form class="login-form" action="/login" method="post">
+      <label for="email">メールアドレス</label>
+      <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="メールアドレス"
+          th:value="${email}"
+      >
 
-        <div class="form-group">
-            <label for="email">メールアドレス</label>
-            <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="メールアドレス">
-        </div>
+      <label for="password">パスワード</label>
+      <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="パスワード"
+      >
 
-        <div class="form-group">
-            <label for="password">パスワード</label>
-            <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="パスワード">
-        </div>
+      <p
+          class="error-message login-error-message"
+          th:if="${loginError}"
+          th:text="${loginError}"
+      ></p>
 
-        <p
-                class="error-message"
-                th:if="${loginError}"
-                th:text="${loginError}">
-        </p>
+      <button class="login-submit-button" type="submit">
+        ログインする
+      </button>
 
-        <button class="submit-button" type="submit">
-            ログインする
-        </button>
+      <a href="/register" class="register-button">
+        新規登録する
+      </a>
 
     </form>
+  </main>
 
-    <a href="/register" class="register-button">
-        新規登録する
-    </a>
-
-</main>
-
-<footer>
+  <footer>
     portfolio site
-</footer>
+  </footer>
 
 </body>
 </html>
