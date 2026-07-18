@@ -175,3 +175,185 @@ footer {
     color: #555;
     margin: 40px 0 60px;
 }
+
+/* =========================
+   ログイン画面
+========================= */
+
+.login-page {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: Roboto, Arial, "Noto Sans JP", sans-serif;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ヘッダー */
+.login-page header {
+  width: 100%;
+  height: 120px;
+  margin: 0;
+  padding: 0;
+  background-color: #1b5678;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.login-page header h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* メイン */
+.login-page main {
+  width: 100%;
+  margin: 0;
+  padding-top: 80px;
+  background-color: #ffffff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* ログイン見出し */
+.login-page main > h1 {
+  margin: 0 0 72px;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.33;
+  text-align: center;
+}
+
+/* フォーム */
+.login-page .login-form {
+  width: 480px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 入力欄 */
+.login-page .form-group {
+  width: 100%;
+  height: 48px;
+  margin: 0 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.login-page .form-group label {
+  margin: 0;
+  color: #777777;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.login-page .form-group input {
+  width: 100%;
+  height: 33px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #aaaaaa;
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  color: #333333;
+  font-size: 16px;
+  line-height: 19px;
+  box-sizing: border-box;
+}
+
+/* クリック時 */
+.login-page .form-group input:focus,
+.login-page .form-group input:focus-visible {
+  border: none;
+  border-bottom: 1px solid #aaaaaa;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Chrome入力補完 */
+.login-page .form-group input:-webkit-autofill,
+.login-page .form-group input:-webkit-autofill:hover,
+.login-page .form-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #333333;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  box-shadow: 0 0 0 1000px #ffffff inset;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+/* エラー */
+.login-page .error-message {
+  margin: -30px 0 20px;
+  color: #d93025;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ボタン */
+.login-page .submit-button,
+.login-page .register-button {
+  width: 268px;
+  height: 53px;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 4px;
+  background-color: #1b5678;
+  color: #ffffff;
+  font-family: Roboto, Arial, "Noto Sans JP", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* ログインボタン */
+.login-page .submit-button {
+  margin: 0 auto;
+}
+
+/* 新規登録ボタン */
+.login-page .register-button {
+  margin: 32px auto 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.login-page .submit-button:hover,
+.login-page .register-button:hover {
+  opacity: 0.85;
+}
+
+/* フッター */
+.login-page footer {
+  width: 100%;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  background-color: #1b5678;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}

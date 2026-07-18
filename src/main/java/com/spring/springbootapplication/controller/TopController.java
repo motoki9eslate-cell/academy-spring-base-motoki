@@ -5,12 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.ui.Model;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import java.util.Map;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 @Controller
 public class TopController {
@@ -30,6 +35,43 @@ public class TopController {
     public String register() {
         return "register";
     }
+
+    @GetMapping("/login")
+public String login() {
+    return "login";
+}
+
+@PostMapping("/login")
+public String loginPost(
+        @RequestParam String email,
+        @RequestParam String password,
+        Model model
+) {
+    try {
+        Map<String, Object> user = jdbcTemplate.queryForMap(
+                "SELECT email, password FROM users WHERE email = ?",
+                email.trim()
+        );
+
+        String hashedPassword = (String) user.get("password");
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if (encoder.matches(password, hashedPassword)) {
+            return "redirect:/";
+        }
+
+    } catch (EmptyResultDataAccessException e) {
+        // 該当するメールアドレスが存在しない場合
+    }
+
+    model.addAttribute(
+            "loginError",
+            "メールアドレス、もしくはパスワードが間違っています"
+    );
+
+    return "login";
+}
 
     @PostMapping("/register")
 public String registerPost(
@@ -88,3 +130,4 @@ public String registerPost(
     return "redirect:/";
 }
 }
+
