@@ -324,3 +324,24 @@ footer {
   font-size: 14px;
   flex-shrink: 0;
 }
+
+.logout-form {
+  margin: 0;
+}
+
+.logout-button {
+  width: 118px;
+    height: 36px;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333333;
+    border: none;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+  opacity: 0.85;
+}

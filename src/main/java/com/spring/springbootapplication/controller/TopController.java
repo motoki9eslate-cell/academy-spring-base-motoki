@@ -1,5 +1,7 @@
 package com.spring.springbootapplication.controller;
 
+import jakarta.servlet.http.HttpSession;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +26,13 @@ public class TopController {
     }
 
     @GetMapping("/")
-    public String top() {
-        return "top";
+public String top(HttpSession session) {
+    if (session.getAttribute("loginUserEmail") == null) {
+        return "redirect:/login";
     }
+
+    return "top";
+}
 
     @GetMapping("/register")
     public String register() {
@@ -38,24 +44,26 @@ public class TopController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginPost(
-            @RequestParam String email,
-            @RequestParam String password,
-            RedirectAttributes redirectAttributes
-    ) {
-        try {
-            Map<String, Object> user = jdbcTemplate.queryForMap(
-                    "SELECT email, password FROM users WHERE email = ?",
-                    email.trim()
-            );
+@PostMapping("/login")
+public String loginPost(
+        @RequestParam String email,
+        @RequestParam String password,
+        RedirectAttributes redirectAttributes,
+        HttpSession session
+) {
+    try {
+        Map<String, Object> user = jdbcTemplate.queryForMap(
+                "SELECT email, password FROM users WHERE email = ?",
+                email.trim()
+        );
 
             String hashedPassword = (String) user.get("password");
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-            if (encoder.matches(password, hashedPassword)) {
-                return "redirect:/";
-            }
+        if (encoder.matches(password, hashedPassword)) {
+             session.setAttribute("loginUserEmail", email);
+            return "redirect:/";
+        }
 
         } catch (EmptyResultDataAccessException e) {
             // 該当するメールアドレスが存在しない場合も、
@@ -124,6 +132,11 @@ public class TopController {
                 hashedPassword
         );
 
-        return "redirect:/";
-    }
+    return "redirect:/";
+}
+@PostMapping("/logout")
+public String logout(HttpSession session) {
+    session.invalidate();
+    return "redirect:/login";
+}
 }
