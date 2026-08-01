@@ -3,19 +3,23 @@ package com.spring.springbootapplication.controller;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import org.springframework.http.MediaType;
 
 @Controller
 public class TopController {
@@ -38,12 +42,21 @@ public String top(HttpSession session, Model model) {
 
     try {
         Map<String, Object> user = jdbcTemplate.queryForMap(
-                "SELECT name, email FROM users WHERE email = ?",
-                loginUserEmail
-        );
+    """
+    SELECT
+        name,
+        email,
+        introduction,
+        image_data
+    FROM users
+    WHERE email = ?
+    """,
+    loginUserEmail
+);
 
         model.addAttribute("loginUser", user);
-
+       boolean hasProfileImage = user.get("image_data") != null;
+model.addAttribute("hasProfileImage", hasProfileImage);
     } catch (EmptyResultDataAccessException e) {
         session.invalidate();
         return "redirect:/login";
@@ -134,6 +147,19 @@ public String loginPost(
             errors.add("パスワードは英数8文字以上で入力してください");
         }
 
+        // メールアドレス重複チェック
+if (!email.isBlank()) {
+Integer count = jdbcTemplate.queryForObject(
+        "SELECT COUNT(*) FROM users WHERE email = ?",
+        Integer.class,
+        email.trim()
+);
+
+if (count != null && count > 0) {
+    errors.add("このメールアドレスは既に登録されています");
+}
+}
+
         // エラーがあれば新規登録画面を再表示する
         if (!errors.isEmpty()) {
             model.addAttribute("errors", errors);
@@ -157,4 +183,148 @@ public String logout(HttpSession session) {
     session.invalidate();
     return "redirect:/login";
 }
+
+@GetMapping("/profile/edit")
+public String showEditProfile(
+        Model model,
+        HttpSession session) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    String introduction = jdbcTemplate.queryForObject(
+            "SELECT introduction FROM users WHERE email = ?",
+            String.class,
+            loginUserEmail
+    );
+
+    model.addAttribute(
+            "introduction",
+            introduction == null ? "" : introduction
+    );
+
+    return "editProfile";
+}
+
+@PostMapping("/profile/edit")
+public String updateProfile(
+        @RequestParam(name = "introduction", required = false)
+        String introduction,
+        @RequestParam(name = "image", required = false)
+        MultipartFile image,
+        Model model,
+        HttpSession session) {
+
+    String trimmedIntroduction =
+            introduction == null ? "" : introduction.trim();
+
+    if (trimmedIntroduction.length() < 50
+            || trimmedIntroduction.length() > 200) {
+
+        model.addAttribute(
+                "errorMessage",
+                "自己紹介は50文字以上200文字以下で入力してください"
+        );
+        model.addAttribute("introduction", introduction);
+
+        return "editProfile";
+    }
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    try {
+        if (image != null && !image.isEmpty()) {
+
+            jdbcTemplate.update(
+                    """
+                    UPDATE users
+                    SET introduction = ?,
+                        image_path = ?,
+                        image_data = ?,
+                        image_content_type = ?
+                    WHERE email = ?
+                    """,
+                    trimmedIntroduction,
+                    image.getOriginalFilename(),
+                    image.getBytes(),
+                    image.getContentType(),
+                    loginUserEmail
+            );
+
+        } else {
+
+            jdbcTemplate.update(
+                    """
+                    UPDATE users
+                    SET introduction = ?
+                    WHERE email = ?
+                    """,
+                    trimmedIntroduction,
+                    loginUserEmail
+            );
+        }
+
+    } catch (IOException e) {
+        model.addAttribute(
+                "imageErrorMessage",
+                "画像の保存に失敗しました"
+        );
+        model.addAttribute("introduction", introduction);
+
+        return "editProfile";
+    }
+
+    return "redirect:/";
+}
+
+@GetMapping("/profile/image")
+public ResponseEntity<byte[]> showProfileImage(
+        HttpSession session) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return ResponseEntity.notFound().build();
+    }
+
+    try {
+        Map<String, Object> imageData = jdbcTemplate.queryForMap(
+                """
+                SELECT image_data, image_content_type
+                FROM users
+                WHERE email = ?
+                """,
+                loginUserEmail
+        );
+
+        byte[] imageBytes =
+                (byte[]) imageData.get("image_data");
+
+        String contentType =
+                (String) imageData.get("image_content_type");
+
+        if (imageBytes == null || contentType == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .body(imageBytes);
+
+    } catch (EmptyResultDataAccessException e) {
+        return ResponseEntity.notFound().build();
+    }
+}
+
 }

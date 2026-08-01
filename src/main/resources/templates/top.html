@@ -20,25 +20,47 @@
 
   <main>
     <section class="profile-section">
-      <div class="profile-left">
-        <div class="profile-image"></div>
-        <p th:text="${loginUser.name}">アカデミー花子</p>
-      </div>
+  <div class="profile-left">
 
-      <div class="profile-right">
-        <h2>自己紹介</h2>
-        <div class="line"></div>
-        <p>
-          自分の自己紹介文章が入ります。自分の自己紹介文章が入ります。
-          自分の自己紹介文章が入ります。自分の自己紹介文章が入ります。
-        </p>
-        <div class="profile-button">
-    <button class="edit-button">
-      自己紹介を編集する
-    </button>
+    <div class="profile-image-area">
+      <img
+        th:if="${hasProfileImage}"
+        th:src="@{/profile/image}"
+        alt="プロフィール画像"
+        class="profile-image">
+
+      <div
+        th:unless="${hasProfileImage}"
+        class="profile-image-placeholder">
+      </div>
+    </div>
+
+    <p th:text="${loginUser['name']}">アカデミー花子</p>
   </div>
-</div>
-    </section>
+
+  <div class="profile-right">
+    <h2>自己紹介</h2>
+    <div class="line"></div>
+
+    <p
+      class="profile-introduction"
+      th:if="${loginUser['introduction'] != null}"
+      th:text="${loginUser['introduction']}">
+    </p>
+
+    <p
+      class="profile-introduction"
+      th:unless="${loginUser['introduction'] != null}">
+      自己紹介はまだ登録されていません
+    </p>
+
+    <div class="profile-button">
+      <a th:href="@{/profile/edit}" class="edit-button">
+        自己紹介を編集する
+      </a>
+    </div>
+  </div>
+</section>
 
     <section class="chart-section">
       <h2>学習チャート</h2>
