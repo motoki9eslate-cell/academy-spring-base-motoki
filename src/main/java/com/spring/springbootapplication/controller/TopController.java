@@ -1,6 +1,7 @@
 package com.spring.springbootapplication.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,26 @@ public class TopController {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @GetMapping("/")
-public String top(HttpSession session) {
-    if (session.getAttribute("loginUserEmail") == null) {
+   @GetMapping("/")
+public String top(HttpSession session, Model model) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    try {
+        Map<String, Object> user = jdbcTemplate.queryForMap(
+                "SELECT name, email FROM users WHERE email = ?",
+                loginUserEmail
+        );
+
+        model.addAttribute("loginUser", user);
+
+    } catch (EmptyResultDataAccessException e) {
+        session.invalidate();
         return "redirect:/login";
     }
 

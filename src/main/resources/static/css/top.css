@@ -69,7 +69,13 @@ main {
   width: 360px;
 }
 
-.profile-right h2,
+.profile-right h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  text-align: left;
+}
+
 .chart-section h2 {
   margin: 0;
   font-size: 32px;
@@ -80,7 +86,12 @@ main {
 .line {
   width: 260px;
   border-bottom: 1px solid #999;
-  margin: 14px auto 24px;
+  margin: 14px 0 24px;
+}
+
+.chart-line {
+  width: 330px;
+  margin: 14px auto 30px;
 }
 
 .profile-right p {
@@ -98,7 +109,11 @@ main {
   border-radius: 3px;
   cursor: pointer;
   display: block;
-  margin: 24px auto 0;
+}
+
+.profile-button {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .chart-section {
@@ -108,13 +123,23 @@ main {
 
 .chart-line {
   width: 330px;
-  margin-bottom: 30px;
+  margin: 14px auto 30px;
+}
+
+/* 自己紹介：タイトル・本文と同じ左端に揃える */
+.profile-right .edit-button {
+  margin: 24px 0 0;
+}
+
+/* 学習チャート：中央に配置する */
+.chart-section .edit-button {
+  margin: 24px auto 0;
 }
 
 .chart-area {
   width: 720px;
   height: 330px;
-  margin: 45px auto 80px;
+  margin: 24px auto 80px;
   border: 1px solid #eee;
   color: #555;
   font-size: 12px;
