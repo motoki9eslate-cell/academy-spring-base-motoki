@@ -1726,3 +1726,11 @@ body > main {
     font-weight: 400;
     line-height: 1;
 }
+
+.auth-error {
+  width: 100%;
+  margin: 8px 0 0;
+  color: #ff0000;
+  font-size: 16px;
+  line-height: 1.4;
+}
