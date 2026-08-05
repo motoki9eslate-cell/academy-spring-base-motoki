@@ -9,7 +9,7 @@
 
 <body class="auth-page">
 
-  <header class="auth-header">
+  <header class="auth-header has-button">
     <h1>My Portfolio</h1>
 
     <a th:href="@{/login}" class="auth-header-button">
@@ -18,7 +18,6 @@
   </header>
 
   <main class="auth-main">
-
     <h2 class="auth-title">新規登録</h2>
 
     <form
@@ -37,25 +36,7 @@
             placeholder="アカデミー花子"
             th:value="${name}">
 
-        <p
-            class="auth-error"
-            th:if="${errors != null
-                and #lists.contains(
-                    errors,
-                    '氏名を入力してください'
-                )}"
-            th:text="'氏名を入力してください'">
-        </p>
-
-        <p
-            class="auth-error"
-            th:if="${errors != null
-                and #lists.contains(
-                    errors,
-                    '氏名は256文字以内で入力してください'
-                )}"
-            th:text="'氏名は256文字以内で入力してください'">
-        </p>
+        <!-- 氏名エラーはこのdiv内 -->
       </div>
 
       <div class="auth-field">
@@ -68,35 +49,7 @@
             placeholder="tatsuya.yokokura@prum.jp"
             th:value="${email}">
 
-        <p
-            class="auth-error"
-            th:if="${errors != null
-                and #lists.contains(
-                    errors,
-                    'メールアドレスを入力してください'
-                )}"
-            th:text="'メールアドレスを入力してください'">
-        </p>
-
-        <p
-            class="auth-error"
-            th:if="${errors != null
-                and #lists.contains(
-                    errors,
-                    '正しいメールアドレスを入力してください'
-                )}"
-            th:text="'正しいメールアドレスを入力してください'">
-        </p>
-        <p
-    class="auth-error"
-    th:if="${errors != null
-        and #lists.contains(
-            errors,
-            'このメールアドレスは既に登録されています'
-        )}"
-    th:text="'このメールアドレスは既に登録されています'">
-</p>
-
+        <!-- メールアドレスエラーはこのdiv内 -->
       </div>
 
       <div class="auth-field">
@@ -108,25 +61,7 @@
             name="password"
             placeholder="パスワード">
 
-        <p
-            class="auth-error"
-            th:if="${errors != null
-                and #lists.contains(
-                    errors,
-                    'パスワードを入力してください'
-                )}"
-            th:text="'パスワードを入力してください'">
-        </p>
-
-        <p
-            class="auth-error"
-            th:if="${errors != null
-                and #lists.contains(
-                    errors,
-                    'パスワードは英数8文字以上で入力してください'
-                )}"
-            th:text="'パスワードは英数8文字以上で入力してください'">
-        </p>
+        <!-- パスワードエラーはこのdiv内 -->
       </div>
 
       <button class="auth-submit-button" type="submit">

@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>自己紹介編集</title>
-
     <link rel="stylesheet" th:href="@{/css/top.css}">
 </head>
 
 <body class="edit-profile-page">
 
-    <!-- ヘッダー -->
     <header class="header">
         <h1>My Portfolio</h1>
 
@@ -19,88 +17,88 @@
         </form>
     </header>
 
-    <!-- メイン -->
     <main class="edit-profile-main">
 
-    <h2>自己紹介を編集する</h2>
+        <h2>自己紹介を編集する</h2>
 
-    <form
-        class="edit-profile-form"
-        th:action="@{/profile/edit}"
-        method="post"
-        enctype="multipart/form-data">
+        <form
+            class="edit-profile-form"
+            th:action="@{/profile/edit}"
+            method="post"
+            enctype="multipart/form-data">
 
-        <!-- 自己紹介 -->
-        <div class="edit-profile-field">
-            <label for="introduction">自己紹介文</label>
+            <div class="edit-profile-field">
+                <label for="introduction">自己紹介文</label>
 
-            <textarea
-                id="introduction"
-                name="introduction"
-                th:text="${introduction}"></textarea>
+                <textarea
+                    id="introduction"
+                    name="introduction"
+                    th:text="${introduction}"></textarea>
 
-            <p class="edit-profile-note">
-                50文字以上、200文字以下で入力してください
-            </p>
-
-            <p
-                class="edit-profile-error"
-                th:if="${errorMessage}"
-                th:text="${errorMessage}">
-            </p>
-        </div>
-
-        <!-- アバター画像 -->
-        <div class="edit-profile-field">
-            <label for="image">アバター画像</label>
-
-            <div class="profile-file-area">
-    <label for="image" class="profile-file-button">
-        画像ファイルを添付する
-    </label>
-
-    <span id="profile-file-name" class="profile-file-name">
-        選択されていません
-    </span>
-
-    <input
-        type="file"
-        id="image"
-        name="image"
-        class="profile-file-input">
-</div>
+                <p class="edit-profile-note">
+                    50文字以上、200文字以下で入力してください
+                </p>
 
                 <p
-    class="edit-profile-error"
-    th:if="${imageErrorMessage}"
-    th:text="${imageErrorMessage}">
-</p>
-        </div>
+                    class="edit-profile-error"
+                    th:if="${errorMessage}"
+                    th:text="${errorMessage}">
+                </p>
+            </div>
 
-        <!-- 保存ボタン -->
-        <button class="edit-profile-submit" type="submit">
-            自己紹介を確定する
-        </button>
+            <div class="edit-profile-field">
+                <label>アバター画像</label>
 
-    </form>
+                <div class="profile-file-area">
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        class="profile-file-input">
 
-</main>
+                    <label
+                        for="image"
+                        class="profile-file-button">
+                        画像ファイルを添付する
+                    </label>
 
-    <!-- フッター -->
+                    <span
+                        class="profile-file-name"
+                        id="profileFileName">
+                        選択されていません
+                    </span>
+                </div>
+
+                <p
+                    class="edit-profile-error"
+                    th:if="${imageErrorMessage}"
+                    th:text="${imageErrorMessage}">
+                </p>
+            </div>
+
+            <button class="edit-profile-submit" type="submit">
+                自己紹介を確定する
+            </button>
+
+        </form>
+
+    </main>
+
     <footer class="edit-profile-footer">
-    portfolio site
-</footer>
-<script>
-    const imageInput = document.getElementById("image");
-    const fileName = document.getElementById("profile-file-name");
+        portfolio site
+    </footer>
 
-    imageInput.addEventListener("change", function () {
-        fileName.textContent =
-            this.files.length > 0
-                ? this.files[0].name
-                : "選択されていません";
-    });
-</script>
+    <script>
+        const imageInput = document.getElementById("image");
+        const fileName = document.getElementById("profileFileName");
+
+        imageInput.addEventListener("change", function () {
+            fileName.textContent =
+                this.files.length > 0
+                    ? this.files[0].name
+                    : "選択されていません";
+        });
+    </script>
+
 </body>
-
 </html>
