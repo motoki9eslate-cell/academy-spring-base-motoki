@@ -1,0 +1,3 @@
+ALTER TABLE users
+ADD COLUMN introduction VARCHAR(200),
+ADD COLUMN image_path VARCHAR(255);

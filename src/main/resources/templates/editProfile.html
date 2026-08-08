@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>自己紹介編集</title>
+    <link rel="stylesheet" th:href="@{/css/top.css}">
+</head>
+
+<body class="edit-profile-page">
+
+    <header class="header">
+        <h1>My Portfolio</h1>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">ログアウト</button>
+        </form>
+    </header>
+
+    <main class="edit-profile-main">
+
+        <h2>自己紹介を編集する</h2>
+
+        <form
+            class="edit-profile-form"
+            th:action="@{/profile/edit}"
+            method="post"
+            enctype="multipart/form-data">
+
+            <div class="edit-profile-field">
+                <label for="introduction">自己紹介文</label>
+
+                <textarea
+                    id="introduction"
+                    name="introduction"
+                    th:text="${introduction}"></textarea>
+
+                <p class="edit-profile-note">
+                    50文字以上、200文字以下で入力してください
+                </p>
+
+                <p
+                    class="edit-profile-error"
+                    th:if="${errorMessage}"
+                    th:text="${errorMessage}">
+                </p>
+            </div>
+
+            <div class="edit-profile-field">
+                <label>アバター画像</label>
+
+                <div class="profile-file-area">
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        class="profile-file-input">
+
+                    <label
+                        for="image"
+                        class="profile-file-button">
+                        画像ファイルを添付する
+                    </label>
+
+                    <span
+                        class="profile-file-name"
+                        id="profileFileName">
+                        選択されていません
+                    </span>
+                </div>
+
+                <p
+                    class="edit-profile-error"
+                    th:if="${imageErrorMessage}"
+                    th:text="${imageErrorMessage}">
+                </p>
+            </div>
+
+            <button class="edit-profile-submit" type="submit">
+                自己紹介を確定する
+            </button>
+
+        </form>
+
+    </main>
+
+    <footer class="edit-profile-footer">
+        portfolio site
+    </footer>
+
+    <script>
+        const imageInput = document.getElementById("image");
+        const fileName = document.getElementById("profileFileName");
+
+        imageInput.addEventListener("change", function () {
+            fileName.textContent =
+                this.files.length > 0
+                    ? this.files[0].name
+                    : "選択されていません";
+        });
+    </script>
+
+</body>
+</html>

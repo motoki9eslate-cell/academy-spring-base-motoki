@@ -1,63 +1,66 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/css/top.css">
+  <link rel="stylesheet" th:href="@{/css/top.css}">
   <title>ログイン</title>
 </head>
 
-<body class="login-page">
+<body class="auth-page">
 
-  <header>
+  <header class="auth-header">
     <h1>My Portfolio</h1>
   </header>
 
-  <main>
-    <h2 class="page-title">ログイン</h2>
+  <main class="auth-main">
+    <h2 class="auth-title">ログイン</h2>
 
     <form
-        class="login-form"
-        action="/login"
+        class="auth-form"
+        th:action="@{/login}"
         method="post"
-        novalidate
-    >
+        novalidate>
 
-      <label for="email">メールアドレス</label>
-      <input
-          id="email"
-          type="email"
-          name="email"
-          placeholder="メールアドレス"
-          th:value="${email}"
-      >
+      <div class="auth-field">
+        <label for="email">メールアドレス</label>
 
-      <label for="password">パスワード</label>
-      <input
-          id="password"
-          type="password"
-          name="password"
-          placeholder="パスワード"
-      >
+        <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="メールアドレス"
+            th:value="${email}">
+      </div>
+
+      <div class="auth-field">
+        <label for="password">パスワード</label>
+
+        <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="パスワード">
+      </div>
 
       <p
-          class="error-message login-error-message"
+          class="auth-error"
           th:if="${loginError}"
-          th:text="${loginError}"
-      ></p>
+          th:text="${loginError}">
+      </p>
 
-      <button class="login-submit-button" type="submit">
+      <button class="auth-submit-button" type="submit">
         ログインする
       </button>
 
-      <a href="/register" class="register-button">
+      <a th:href="@{/register}" class="auth-register-button">
         新規登録する
       </a>
 
     </form>
   </main>
 
-  <footer>
+  <footer class="auth-footer">
     portfolio site
   </footer>
 
