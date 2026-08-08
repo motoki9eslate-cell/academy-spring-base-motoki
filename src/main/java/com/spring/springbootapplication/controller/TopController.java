@@ -184,6 +184,143 @@ public String logout(HttpSession session) {
     return "redirect:/login";
 }
 
+@GetMapping("/skills")
+public String showSkills(
+        @RequestParam(name = "month", required = false) Integer month,
+        HttpSession session,
+        Model model) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    java.time.LocalDate today = java.time.LocalDate.now();
+
+    List<Integer> months = new ArrayList<>();
+
+    for (int i = 0; i < 4; i++) {
+        months.add(today.minusMonths(i).getMonthValue());
+    }
+
+    int selectedMonth = today.getMonthValue();
+
+    if (month != null && months.contains(month)) {
+        selectedMonth = month;
+    }
+
+    model.addAttribute("months", months);
+    model.addAttribute("selectedMonth", selectedMonth);
+
+    Integer userId = jdbcTemplate.queryForObject(
+            "SELECT id FROM users WHERE email = ?",
+            Integer.class,
+            loginUserEmail
+    );
+
+    java.time.LocalDate selectedLearningMonth =
+            today.withDayOfMonth(1);
+
+    if (month != null) {
+        for (int i = 0; i < 4; i++) {
+
+            java.time.LocalDate candidate =
+                    today.minusMonths(i).withDayOfMonth(1);
+
+            if (candidate.getMonthValue() == month) {
+                selectedLearningMonth = candidate;
+                break;
+            }
+        }
+    }
+
+    List<Map<String, Object>> skillList = jdbcTemplate.queryForList(
+            """
+            SELECT
+                c.id AS category_id,
+                c.name AS category_name,
+                s.id AS skill_id,
+                s.name AS skill_name,
+                COALESCE(ld.learning_minutes, 0) AS learning_minutes
+            FROM categories c
+            JOIN skills s
+                ON c.id = s.category_id
+            LEFT JOIN learning_data ld
+                ON ld.skill_id = s.id
+                AND ld.user_id = ?
+                AND ld.learning_month = ?
+            ORDER BY c.id, s.id
+            """,
+            userId,
+            selectedLearningMonth
+    );
+
+    model.addAttribute("skillList", skillList);
+
+    return "skills";
+}
+
+@PostMapping("/skills/save")
+public String saveLearningTime(
+        @RequestParam Integer skillId,
+        @RequestParam Integer month,
+        @RequestParam Integer learningMinutes,
+        HttpSession session) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    if (learningMinutes < 0) {
+        return "redirect:/skills?month=" + month;
+    }
+
+    Integer userId = jdbcTemplate.queryForObject(
+            "SELECT id FROM users WHERE email = ?",
+            Integer.class,
+            loginUserEmail
+    );
+
+    java.time.LocalDate today = java.time.LocalDate.now();
+    java.time.LocalDate selectedLearningMonth = null;
+
+    for (int i = 0; i < 4; i++) {
+        java.time.LocalDate candidate =
+                today.minusMonths(i).withDayOfMonth(1);
+
+        if (candidate.getMonthValue() == month) {
+            selectedLearningMonth = candidate;
+            break;
+        }
+    }
+
+    if (selectedLearningMonth == null) {
+        return "redirect:/skills";
+    }
+
+    jdbcTemplate.update(
+            """
+            INSERT INTO learning_data
+                (user_id, skill_id, learning_minutes, learning_month)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT (user_id, skill_id, learning_month)
+            DO UPDATE SET
+                learning_minutes = EXCLUDED.learning_minutes
+            """,
+            userId,
+            skillId,
+            learningMinutes,
+            selectedLearningMonth
+    );
+
+    return "redirect:/skills?month=" + month;
+}
+
 @GetMapping("/profile/edit")
 public String showEditProfile(
         Model model,

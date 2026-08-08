@@ -1734,3 +1734,913 @@ body > main {
   font-size: 16px;
   line-height: 1.4;
 }
+
+/* ==================================================
+   項目一覧ページ
+================================================== */
+
+.skills-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+/* ---------- ヘッダー ---------- */
+
+.skills-page .skills-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    padding: 0 40px;
+
+    background-color: #1b5678;
+}
+
+.skills-page .skills-header h1 {
+    margin: 0;
+
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* ---------- ログアウト ---------- */
+
+.skills-page .skills-header form {
+    margin: 0;
+}
+
+.skills-page .skills-logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 170px;
+    height: 53px;
+
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.75);
+
+    font-family: inherit;
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+/* ---------- メイン ---------- */
+
+.skills-page .skills-main {
+    flex: 1;
+
+    box-sizing: border-box;
+    width: 100%;
+
+    padding: 40px 20px 80px;
+}
+
+.skills-page .skills-container {
+    width: 960px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* ---------- 月選択 ---------- */
+
+.skills-page .month-select-area {
+    margin-bottom: 40px;
+}
+
+.skills-page .month-select {
+    box-sizing: border-box;
+
+    min-width: 80px;
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+    color: #222222;
+
+    font-family: inherit;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+/* ---------- フッター ---------- */
+
+.skills-page .skills-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 18px;
+}
+
+/* ---------- 項目一覧：スキルカード ---------- */
+
+.skills-page .skill-card {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 30px;
+    padding: 28px 30px 34px;
+
+    border: 1px solid #999999;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+}
+
+/* カード上部 */
+.skills-page .skill-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+/* 「バックエンド」 */
+.skills-page .skill-card-header h2 {
+    position: relative;
+
+    margin: 0;
+    padding-bottom: 10px;
+
+    color: #333333;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* タイトル下の線 */
+.skills-page .skill-card-header h2::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 170px;
+
+    border-bottom: 1px solid #777777;
+}
+
+/* 項目を追加するボタン */
+.skills-page .add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    width: 180px;
+    height: 46px;
+
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.skills-page .add-button:hover {
+    opacity: 0.85;
+}
+
+/* ---------- 項目一覧：テーブル ---------- */
+
+.skills-page .skill-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* 見出し・セル */
+.skills-page .skill-table th,
+.skills-page .skill-table td {
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* 見出し */
+.skills-page .skill-table th {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* 項目名 */
+.skills-page .skill-table td:first-child {
+    font-size: 15px;
+    color: #333333;
+}
+
+/* 列幅 */
+.skills-page .skill-table th:nth-child(1),
+.skills-page .skill-table td:nth-child(1) {
+    width: 25%;
+}
+
+.skills-page .skill-table th:nth-child(2),
+.skills-page .skill-table td:nth-child(2) {
+    width: 25%;
+}
+
+.skills-page .skill-table th:nth-child(3),
+.skills-page .skill-table td:nth-child(3) {
+    width: 30%;
+}
+
+.skills-page .skill-table th:nth-child(4),
+.skills-page .skill-table td:nth-child(4) {
+    width: 20%;
+}
+
+/* 学習時間入力欄 */
+.skills-page .skill-table input[type="number"] {
+    box-sizing: border-box;
+    width: 140px;
+    height: 38px;
+
+    padding: 0 12px;
+
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+
+    background-color: #ffffff;
+    color: #555555;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* 保存ボタン */
+.skills-page .save-button {
+    box-sizing: border-box;
+    min-width: 170px;
+    height: 38px;
+
+    padding: 0 14px;
+
+    border: 1px solid #1b5678;
+    border-radius: 3px;
+
+    background-color: #ffffff;
+    color: #1b5678;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+/* 削除ボタン */
+.skills-page .delete-button {
+    box-sizing: border-box;
+    width: 90px;
+    height: 38px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 3px;
+
+    background-color: #f06464;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.skills-page .save-button:hover,
+.skills-page .delete-button:hover {
+    opacity: 0.85;
+}
+
+/* ==========================
+   スキル一覧スクロール
+========================== */
+
+.skill-table-wrapper {
+    width: 100%;
+}
+
+/* =========================
+   skills page
+========================= */
+
+.skills-page {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  background: #fff;
+}
+
+.skills-main {
+  width: 100%;
+  padding: 40px 0 80px;
+}
+
+.skills-container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+/* 月選択 */
+.month-select-area {
+  margin-bottom: 40px;
+}
+
+.month-select {
+  width: 94px;
+  height: 44px;
+  padding: 8px 16px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* カテゴリカード */
+.skill-card {
+  box-sizing: border-box;
+  width: 960px;
+  min-height: 460px;
+  padding: 40px;
+  margin-bottom: 80px;
+
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* タイトル + 追加ボタン */
+.skill-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 880px;
+  min-height: 48px;
+  margin-bottom: 32px;
+}
+
+.skill-card-header h2 {
+  width: 240px;
+  margin: 0;
+  padding-bottom: 16px;
+
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.75);
+
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+/* 項目を追加する */
+.add-button {
+  width: 178px;
+  height: 48px;
+
+  border: none;
+  border-radius: 4px;
+  background: #1b5678;
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* テーブル */
+.skill-table {
+  width: 880px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* ヘッダー */
+.skill-table thead tr {
+  height: 56px;
+}
+
+.skill-table th {
+  height: 56px;
+  padding: 16px;
+
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* 列幅 */
+.skill-table th:nth-child(1),
+.skill-table td:nth-child(1) {
+  width: 240px;
+  box-sizing: border-box;
+  padding-left: 40px;
+}
+
+.skill-table th:nth-child(2) {
+  width: 240px;
+}
+
+.skill-table th:nth-child(3) {
+  width: 200px;
+}
+
+.skill-table th:nth-child(4) {
+  width: 200px;
+}
+
+/* 行 */
+.skill-table tbody tr {
+  height: 72px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.skill-table td {
+  height: 72px;
+  padding: 16px;
+  box-sizing: border-box;
+
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* skill名 */
+.skill-table td:first-child {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* 現在のHTMLではフォームが3列分を使っているため */
+.skill-table td[colspan="3"] {
+  padding: 0;
+}
+
+/* 保存フォーム */
+.skill-save-form {
+  display: grid;
+  grid-template-columns: 240px 200px 200px;
+  align-items: center;
+  height: 72px;
+}
+
+/* 学習時間 */
+.skill-save-form input[type="number"] {
+  box-sizing: border-box;
+  width: 160px;
+  height: 40px;
+  margin-left: 0;
+  padding: 0 12px;
+
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  background: #fff;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* 保存ボタン */
+.save-button {
+  box-sizing: border-box;
+  width: 158px;
+  height: 32px;
+
+  padding: 8px 16px;
+
+  border: 1px solid #1b5678;
+  border-radius: 4px;
+  background: #fff;
+  color: #1b5678;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+/* 削除ボタン */
+.delete-button {
+  box-sizing: border-box;
+  width: 88px;
+  height: 32px;
+
+  padding: 8px 16px;
+
+  border: none;
+  border-radius: 4px;
+  background: #ee6969;
+  color: #fff;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+/* フッターとの余白調整 */
+.skill-card:last-child {
+  margin-bottom: 0;
+}
+
+/* ボタンのフォーカス時に変な黒枠が出る場合 */
+.add-button:focus,
+.save-button:focus,
+.delete-button:focus,
+.month-select:focus,
+.skill-save-form input[type="number"]:focus {
+  outline: none;
+}
+
+/* =========================================
+   skills.html WF 最終調整
+========================================= */
+
+/* ページ全体 */
+.skills-container {
+    width: 960px;
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+
+/* ==========================
+   カテゴリカード
+========================== */
+
+.skill-card {
+    width: 960px;
+    max-width: 100%;
+    min-height: 436px;
+
+    box-sizing: border-box;
+    padding: 40px;
+    margin-bottom: 80px;
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    background-color: #fff;
+
+    overflow: hidden;
+}
+
+
+/* ==========================
+   タイトル + 追加ボタン
+========================== */
+
+.skill-card-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 24px;
+    margin-bottom: 32px;
+
+    box-sizing: border-box;
+}
+
+
+/* タイトル */
+.skill-card-header h2 {
+    position: relative;
+
+    display: inline-block;
+
+    min-width: 240px;
+    width: fit-content;
+
+    margin: 0;
+    padding-bottom: 16px;
+
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+
+    white-space: nowrap;   /* ← 折り返し禁止 */
+
+    border-bottom: none;
+}
+
+
+/* 項目追加ボタン */
+.add-button {
+    width: 178px;
+    height: 48px;
+
+    flex: 0 0 178px;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #1b5678;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+
+/* ==========================
+   テーブル
+========================== */
+
+.skill-table-wrapper {
+    width: 100%;
+
+    /* スクロールさせない */
+    max-height: none;
+    overflow: visible;
+
+    /* WFのテーブル部分 */
+    background-color: #fff;
+
+    box-shadow:
+        0 1px 5px rgba(0, 0, 0, 0.12),
+        0 2px 2px rgba(0, 0, 0, 0.14);
+
+    box-sizing: border-box;
+}
+
+
+.skill-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    background-color: #fff;
+
+    /* テーブル自体の外枠は不要 */
+    border: none;
+    box-shadow: none;
+}
+
+
+/* ヘッダー */
+.skill-table thead {
+    border: none;
+}
+
+
+.skill-table thead tr {
+    height: 56px;
+}
+
+
+.skill-table th {
+    height: 56px;
+
+    padding: 16px;
+
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+
+    box-sizing: border-box;
+}
+
+
+/* 行 */
+.skill-table tbody tr {
+    height: 72px;
+}
+
+
+.skill-table td {
+    height: 72px;
+
+    padding: 16px;
+
+    font-size: 14px;
+
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+
+/* 項目名 */
+.skill-table th:first-child,
+.skill-table td:first-child {
+    width: 240px;
+    padding-left: 40px;
+}
+
+
+/* 学習時間 */
+.skill-table th:nth-child(2) {
+    width: 240px;
+}
+
+
+/* 数値入力 */
+.skill-table input[type="number"] {
+    width: 160px;
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+
+/* 保存ボタン */
+.save-button {
+    min-width: 158px;
+    height: 32px;
+
+    padding: 8px 16px;
+
+    border: 1px solid #1b5678;
+    border-radius: 4px;
+
+    background-color: #fff;
+    color: #1b5678;
+
+    font-size: 14px;
+    white-space: nowrap;
+
+    box-sizing: border-box;
+}
+
+
+/* 削除ボタン */
+.delete-button {
+    width: 88px;
+    height: 32px;
+
+    padding: 8px 16px;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #ee6969;
+    color: #fff;
+
+    font-size: 14px;
+    white-space: nowrap;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================
+   開発者ツールを開いた時など
+   横幅が狭い場合
+========================== */
+
+@media (max-width: 1000px) {
+
+    .skills-container {
+        width: calc(100% - 32px);
+        max-width: none;
+    }
+
+    .skill-card {
+        width: 100%;
+    }
+
+    .skill-card-header {
+        width: 100%;
+    }
+
+    .add-button {
+        flex-shrink: 0;
+    }
+}
+
+
+/* さらに狭くなった場合 */
+@media (max-width: 700px) {
+
+    .skill-card {
+        padding: 24px;
+    }
+
+    .skill-card-header {
+        flex-wrap: wrap;
+    }
+
+    .add-button {
+        margin-left: auto;
+    }
+
+    .skill-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .skill-table {
+        min-width: 760px;
+    }
+}
+
+/* ==========================
+   スキルカード見出し
+   WFに合わせる
+========================== */
+
+.skills-page .skill-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.skills-page .skill-card-header h2 {
+    position: relative;
+
+    width: 240px;
+    max-width: 240px;
+
+    margin: 0;
+
+    padding: 0 0 16px 0;
+
+    font-family: Roboto, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: #333333;
+
+    /* 古い下線を消す */
+    border-bottom: none;
+}
+
+/* 見本と同じ1本だけの下線 */
+.skills-page .skill-card-header h2::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 240px;
+
+    border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
