@@ -2082,20 +2082,65 @@ body > main {
   margin: 0 auto;
 }
 
-/* 月選択 */
+/* ==========================
+   月選択プルダウン
+========================== */
+
 .month-select-area {
-  margin-bottom: 40px;
+    width: 960px;
+    margin: 48px auto 48px;
+}
+
+.month-select-area form {
+    position: relative;
+    width: 94px;
 }
 
 .month-select {
-  width: 94px;
-  height: 44px;
-  padding: 8px 16px;
-  border: 1px solid #dddddd;
-  border-radius: 4px;
-  background: #fff;
-  font-size: 16px;
-  font-weight: 700;
+   box-sizing: border-box;
+
+    width: 94px;
+    height: 44px;
+
+    padding: 8px 32px 8px 16px;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: #000;
+    background-color: #fff;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    /* ブラウザ標準の矢印を消す */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Figmaに近い▼ */
+.month-select-area form::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    right: 16px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 9px solid #000;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
 }
 
 /* カテゴリカード */
