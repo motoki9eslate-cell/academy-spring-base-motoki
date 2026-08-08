@@ -2077,23 +2077,20 @@ body > main {
   padding: 40px 0 80px;
 }
 
-.skills-container {
-  width: 960px;
-  margin: 0 auto;
-}
-
 /* ==========================
    月選択プルダウン
 ========================== */
 
 .month-select-area {
-    width: 960px;
-    margin: 48px auto 48px;
+  width: calc(100% - 40px);
+  max-width: 960px;
+  margin: 48px auto;
+  box-sizing: border-box;
 }
 
 .month-select-area form {
-    position: relative;
-    width: 94px;
+  position: relative;
+  width: 94px;
 }
 
 .month-select {
@@ -2347,15 +2344,6 @@ body > main {
    skills.html WF 最終調整
 ========================================= */
 
-/* ページ全体 */
-.skills-container {
-    width: 960px;
-    max-width: calc(100% - 40px);
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-
 /* ==========================
    カテゴリカード
 ========================== */
@@ -2592,6 +2580,18 @@ body > main {
     box-sizing: border-box;
 }
 
+.skills-container {
+    width: calc(100% - 40px);
+    max-width: 960px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.skill-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 
 /* ==========================
    開発者ツールを開いた時など
@@ -2688,4 +2688,80 @@ body > main {
     width: 240px;
 
     border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================
+   画面右側の余白対策
+========================== */
+
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.skills-page {
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.skills-header,
+.skills-footer {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.skills-main {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================
+   skillsページ 横はみ出し対策
+========================== */
+
+.skills-page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.skills-main {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.skills-container {
+    width: calc(100% - 40px);
+    max-width: 960px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* 月選択 */
+.skills-page .month-select-area {
+    width: 100%;
+    max-width: 960px;
+    margin: 48px auto;
+    box-sizing: border-box;
+}
+
+/* カテゴリカード */
+.skills-page .skill-card {
+    width: 100%;
+    max-width: 960px;
+    box-sizing: border-box;
+}
+
+/* ヘッダー・フッター */
+.skills-header,
+.skills-footer {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
