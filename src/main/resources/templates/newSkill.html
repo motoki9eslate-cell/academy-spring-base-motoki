@@ -122,26 +122,6 @@
 <footer class="skills-footer">
     portfolio site
 </footer>
-<!-- 登録完了モーダル -->
-<div
-    class="skill-modal-overlay"
-    th:if="${registrationComplete}">
-
-    <div class="skill-modal">
-
-        <h2>登録が完了しました</h2>
-
-        <p>項目の登録が完了しました。</p>
-
-        <a
-            th:href="@{/skills(month=${month})}"
-            class="skill-modal-button">
-            編集ページに戻る
-        </a>
-
-    </div>
-
-</div>
 
 <div class="registration-modal"
      th:if="${registrationComplete}">
