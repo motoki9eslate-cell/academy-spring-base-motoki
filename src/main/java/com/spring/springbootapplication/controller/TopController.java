@@ -371,14 +371,14 @@ Integer duplicateCount = jdbcTemplate.queryForObject(
         """,
         Integer.class,
         categoryId,
-        skillName.trim()
+        skillName == null ? "" : skillName.trim()
 );
 
 if (duplicateCount != null && duplicateCount > 0) {
 
     model.addAttribute(
             "skillNameError",
-            skillName.trim() + "は既に登録されています"
+            skillName == null ? "" : skillName.trim() + "は既に登録されています"
     );
 
     return "newSkill";
@@ -391,7 +391,7 @@ if (duplicateCount != null && duplicateCount > 0) {
             VALUES (?, ?)
             """,
             categoryId,
-            skillName.trim()
+            skillName == null ? "" : skillName.trim()
     );
 
     // ② 今追加したskillのidを取得
@@ -406,7 +406,7 @@ if (duplicateCount != null && duplicateCount > 0) {
             """,
             Integer.class,
             categoryId,
-            skillName.trim()
+            skillName == null ? "" : skillName.trim()
     );
 
     // ③ ログインユーザーのidを取得
@@ -452,7 +452,7 @@ model.addAttribute("categoryId", categoryId);
 model.addAttribute("categoryName", categoryName);
 model.addAttribute("month", month);
 
-model.addAttribute("registeredSkillName", skillName.trim());
+model.addAttribute("registeredSkillName", skillName == null ? "" : skillName.trim());
 model.addAttribute("registeredLearningMinutes", learningMinutes);
 
 model.addAttribute("registrationComplete", true);
