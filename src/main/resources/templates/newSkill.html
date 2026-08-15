@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>項目追加</title>
+
+    <link rel="stylesheet" th:href="@{/css/top.css}">
+</head>
+
+<body class="new-skill-page">
+
+<header class="skills-header">
+
+    <h1>My Portfolio</h1>
+
+    <form th:action="@{/logout}" method="post">
+        <button
+            type="submit"
+            class="skills-logout-button">
+            ログアウト
+        </button>
+    </form>
+
+</header>
+
+
+<main class="new-skill-main">
+
+    <div class="new-skill-container">
+
+        <h2
+            class="new-skill-title"
+            th:text="${categoryName + 'に項目を追加'}">
+            カテゴリー名に項目を追加
+        </h2>
+
+
+        <form
+    th:action="@{/skills/new}"
+    method="post"
+    class="new-skill-form"
+    novalidate>
+
+            <input
+                type="hidden"
+                name="categoryId"
+                th:value="${categoryId}">
+
+            <input
+                type="hidden"
+                name="month"
+                th:value="${month}">
+
+
+            <!-- 項目名 -->
+            <div class="new-skill-form-group">
+
+    <label for="skillName">
+        項目名
+    </label>
+
+    <input
+        type="text"
+        id="skillName"
+        name="skillName"
+        class="new-skill-input"
+        th:value="${skillName}">
+
+    <p
+        class="new-skill-error"
+        th:if="${skillNameError}"
+        th:text="${skillNameError}">
+    </p>
+
+</div>
+
+
+            <!-- 学習時間 -->
+            <div class="new-skill-form-group learning-time-group">
+
+    <label for="learningMinutes">
+        学習時間
+    </label>
+
+    <input
+        type="number"
+        id="learningMinutes"
+        name="learningMinutes"
+        class="new-skill-input"
+        step="1"
+        th:value="${learningMinutes}">
+
+    <p class="new-skill-helper">
+        分単位で入力してください
+    </p>
+
+    <p
+        class="new-skill-error"
+        th:if="${learningMinutesError}"
+        th:text="${learningMinutesError}">
+    </p>
+
+</div>
+
+
+            <button
+                type="submit"
+                class="new-skill-submit-button">
+                追加する
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+
+<footer class="skills-footer">
+    portfolio site
+</footer>
+<!-- 登録完了モーダル -->
+<div
+    class="skill-modal-overlay"
+    th:if="${registrationComplete}">
+
+    <div class="skill-modal">
+
+        <h2>登録が完了しました</h2>
+
+        <p>項目の登録が完了しました。</p>
+
+        <a
+            th:href="@{/skills(month=${month})}"
+            class="skill-modal-button">
+            編集ページに戻る
+        </a>
+
+    </div>
+
+</div>
+
+<div class="registration-modal"
+     th:if="${registrationComplete}">
+
+    <div class="registration-modal-content">
+
+        <p class="registration-modal-message">
+            <span th:text="${categoryName}"></span> に
+            <span th:text="${registeredSkillName}"></span> を<br>
+            <span th:text="${registeredLearningMinutes}"></span>分で追加しました！
+        </p>
+
+        <a class="registration-modal-button"
+           th:href="@{/skills(month=${month})}">
+            編集ページに戻る
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
