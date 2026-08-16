@@ -582,7 +582,7 @@ public String updateSkill(
         @RequestParam Integer month,
         @RequestParam Integer learningMinutes,
         HttpSession session,
-        RedirectAttributes redirectAttributes) {
+        Model model) {
 
     String loginUserEmail =
             (String) session.getAttribute("loginUserEmail");
@@ -604,17 +604,13 @@ public String updateSkill(
     // 学習時間更新処理
     // ここは今まで動いていた既存コードをそのまま残す
 
-    redirectAttributes.addFlashAttribute(
-            "updateComplete",
-            true
-    );
+   
 
-    redirectAttributes.addFlashAttribute(
-            "updatedSkillName",
-            skillName
-    );
+    model.addAttribute("updateComplete", true);
+model.addAttribute("updatedSkillName", skillName);
+model.addAttribute("selectedMonth", month);
 
-    return "redirect:/skills?month=" + month;
+return showSkills(month, session, model);
 }
 
 @GetMapping("/profile/edit")
