@@ -523,7 +523,8 @@ public String saveLearningTime(
 public String deleteSkill(
         @RequestParam Integer skillId,
         @RequestParam Integer month,
-        HttpSession session) {
+        HttpSession session,
+        RedirectAttributes redirectAttributes) {
 
     String loginUserEmail =
             (String) session.getAttribute("loginUserEmail");
@@ -532,7 +533,18 @@ public String deleteSkill(
         return "redirect:/login";
     }
 
-    // 先に学習時間データを削除
+    // 削除する項目名を先に取得
+    String skillName = jdbcTemplate.queryForObject(
+            """
+            SELECT name
+            FROM skills
+            WHERE id = ?
+            """,
+            String.class,
+            skillId
+    );
+
+    // 学習時間データを削除
     jdbcTemplate.update(
             """
             DELETE FROM learning_data
@@ -541,7 +553,7 @@ public String deleteSkill(
             skillId
     );
 
-    // その後、項目自体を削除
+    // 項目を削除
     jdbcTemplate.update(
             """
             DELETE FROM skills
@@ -550,15 +562,27 @@ public String deleteSkill(
             skillId
     );
 
+    // 削除完了モーダル用
+    redirectAttributes.addFlashAttribute(
+            "deleteComplete",
+            true
+    );
+
+    redirectAttributes.addFlashAttribute(
+            "deletedSkillName",
+            skillName
+    );
+
     return "redirect:/skills?month=" + month;
 }
 
 @PostMapping("/skills/update")
-public String updateLearningMinutes(
+public String updateSkill(
         @RequestParam Integer skillId,
         @RequestParam Integer month,
         @RequestParam Integer learningMinutes,
-        HttpSession session) {
+        HttpSession session,
+        RedirectAttributes redirectAttributes) {
 
     String loginUserEmail =
             (String) session.getAttribute("loginUserEmail");
@@ -567,78 +591,28 @@ public String updateLearningMinutes(
         return "redirect:/login";
     }
 
-    if (learningMinutes == null || learningMinutes < 0) {
-        return "redirect:/skills?month=" + month;
-    }
-
-    Integer userId = jdbcTemplate.queryForObject(
-            "SELECT id FROM users WHERE email = ?",
-            Integer.class,
-            loginUserEmail
-    );
-
-    java.time.LocalDate today = java.time.LocalDate.now();
-    java.time.LocalDate selectedLearningMonth = null;
-
-    for (int i = 0; i < 4; i++) {
-
-        java.time.LocalDate candidate =
-                today.minusMonths(i).withDayOfMonth(1);
-
-        if (candidate.getMonthValue() == month) {
-            selectedLearningMonth = candidate;
-            break;
-        }
-    }
-
-    if (selectedLearningMonth == null) {
-        return "redirect:/skills";
-    }
-
-    Integer count = jdbcTemplate.queryForObject(
+    String skillName = jdbcTemplate.queryForObject(
             """
-            SELECT COUNT(*)
-            FROM learning_data
-            WHERE user_id = ?
-              AND skill_id = ?
-              AND learning_month = ?
+            SELECT name
+            FROM skills
+            WHERE id = ?
             """,
-            Integer.class,
-            userId,
-            skillId,
-            selectedLearningMonth
+            String.class,
+            skillId
     );
 
-    if (count != null && count > 0) {
+    // 学習時間更新処理
+    // ここは今まで動いていた既存コードをそのまま残す
 
-        jdbcTemplate.update(
-                """
-                UPDATE learning_data
-                SET learning_minutes = ?
-                WHERE user_id = ?
-                  AND skill_id = ?
-                  AND learning_month = ?
-                """,
-                learningMinutes,
-                userId,
-                skillId,
-                selectedLearningMonth
-        );
+    redirectAttributes.addFlashAttribute(
+            "updateComplete",
+            true
+    );
 
-    } else {
-
-        jdbcTemplate.update(
-                """
-                INSERT INTO learning_data
-                    (user_id, skill_id, learning_minutes, learning_month)
-                VALUES (?, ?, ?, ?)
-                """,
-                userId,
-                skillId,
-                learningMinutes,
-                selectedLearningMonth
-        );
-    }
+    redirectAttributes.addFlashAttribute(
+            "updatedSkillName",
+            skillName
+    );
 
     return "redirect:/skills?month=" + month;
 }

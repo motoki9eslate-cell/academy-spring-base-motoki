@@ -3026,3 +3026,63 @@ body.new-skill-page {
     font-family: Roboto, sans-serif;
     font-size: 14px;
 }
+
+/* =========================
+   項目削除完了モーダル
+========================= */
+
+.delete-complete-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.delete-complete-modal-content {
+    width: 480px;
+    min-height: 240px;
+
+    background: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-complete-modal-message {
+    margin: 0 0 40px;
+
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.delete-complete-modal-button {
+    box-sizing: border-box;
+
+    width: 220px;
+    height: 56px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #1b6689;
+    color: #fff;
+
+    text-decoration: none;
+    font-size: 16px;
+
+    border-radius: 4px;
+}
