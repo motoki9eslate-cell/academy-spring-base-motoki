@@ -3086,3 +3086,68 @@ body.new-skill-page {
 
     border-radius: 4px;
 }
+
+/* =========================
+   学習時間保存完了モーダル
+========================= */
+
+.update-complete-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.update-complete-modal-content {
+    box-sizing: border-box;
+
+    width: 720px;
+    height: 270px;
+
+    background: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.update-complete-modal-message {
+    margin: 0 0 40px;
+
+    text-align: center;
+
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.update-complete-modal-button {
+    box-sizing: border-box;
+
+    width: 220px;
+    height: 56px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #1b6689;
+    color: #fff;
+
+    text-decoration: none;
+    font-size: 16px;
+
+    border-radius: 4px;
+}

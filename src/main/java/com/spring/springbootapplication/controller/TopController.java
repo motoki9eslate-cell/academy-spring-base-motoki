@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.http.MediaType;
+import java.time.LocalDate;
 
 @Controller
 public class TopController {
@@ -591,6 +592,18 @@ public String updateSkill(
         return "redirect:/login";
     }
 
+    // ログインユーザーIDを取得
+    Integer userId = jdbcTemplate.queryForObject(
+            """
+            SELECT id
+            FROM users
+            WHERE email = ?
+            """,
+            Integer.class,
+            loginUserEmail
+    );
+
+    // 項目名を取得
     String skillName = jdbcTemplate.queryForObject(
             """
             SELECT name
@@ -601,16 +614,44 @@ public String updateSkill(
             skillId
     );
 
-    // 学習時間更新処理
-    // ここは今まで動いていた既存コードをそのまま残す
+    // 選択された月の年月を作成
+    LocalDate now = LocalDate.now();
 
-   
+    int year = now.getYear();
 
+    // 例：現在が1月で12月を選択した場合は前年
+    if (month > now.getMonthValue()) {
+        year--;
+    }
+
+    LocalDate learningMonth =
+            LocalDate.of(year, month, 1);
+
+
+    // 行がなければINSERT
+    // 行があればUPDATE
+    jdbcTemplate.update(
+            """
+            INSERT INTO learning_data
+                (user_id, skill_id, learning_minutes, learning_month)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT (user_id, skill_id, learning_month)
+            DO UPDATE SET
+                learning_minutes = EXCLUDED.learning_minutes
+            """,
+            userId,
+            skillId,
+            learningMinutes,
+            learningMonth
+    );
+
+
+    // 保存完了モーダル
     model.addAttribute("updateComplete", true);
-model.addAttribute("updatedSkillName", skillName);
-model.addAttribute("selectedMonth", month);
+    model.addAttribute("updatedSkillName", skillName);
+    model.addAttribute("selectedMonth", month);
 
-return showSkills(month, session, model);
+    return showSkills(month, session, model);
 }
 
 @GetMapping("/profile/edit")
