@@ -376,7 +376,24 @@
 <footer class="skills-footer">
     portfolio site
 </footer>
+<div class="registration-modal"
+     th:if="${updateComplete}">
 
+    <div class="registration-modal-content">
+
+        <p class="registration-modal-message">
+            <span th:text="${updatedSkillName}"></span>
+            の学習時間を保存しました！
+        </p>
+
+        <a class="registration-modal-button"
+           th:href="@{/skills(month=${selectedMonth})}">
+            編集ページに戻る
+        </a>
+
+    </div>
+
+</div>
 </body>
 
 </html>

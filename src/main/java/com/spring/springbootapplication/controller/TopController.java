@@ -569,7 +569,8 @@ public String updateLearningMinutes(
         @RequestParam Integer skillId,
         @RequestParam Integer month,
         @RequestParam Integer learningMinutes,
-        HttpSession session) {
+        HttpSession session,
+        Model model) {
 
     String loginUserEmail =
             (String) session.getAttribute("loginUserEmail");
@@ -651,7 +652,18 @@ public String updateLearningMinutes(
         );
     }
 
-    return "redirect:/skills?month=" + month;
+    model.addAttribute("updateComplete", true);
+
+String skillName = jdbcTemplate.queryForObject(
+        "SELECT name FROM skills WHERE id = ?",
+        String.class,
+        skillId
+);
+
+model.addAttribute("updatedSkillName", skillName);
+model.addAttribute("selectedMonth", month);
+
+return showSkills(month, session, model);
 }
 
 @GetMapping("/profile/edit")
