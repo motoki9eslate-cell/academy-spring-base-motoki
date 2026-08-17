@@ -3026,3 +3026,10 @@ body.new-skill-page {
     font-family: Roboto, sans-serif;
     font-size: 14px;
 }
+
+/* スキル一覧：3件分の高さでスクロール */
+.skills-page .skill-table-wrapper {
+    width: 100%;
+    height: 272px;
+    overflow-y: auto;
+}
