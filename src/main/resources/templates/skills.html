@@ -12,231 +12,370 @@
 
 <body class="skills-page">
 
-    <header class="skills-header">
-        <h1>My Portfolio</h1>
+<header class="skills-header">
+    <h1>My Portfolio</h1>
 
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" class="skills-logout-button">
-                ログアウト
-            </button>
-        </form>
-    </header>
-
-    <main class="skills-main">
-
-        <div class="skills-container">
-
-            <div class="month-select-area">
-
-    <form th:action="@{/skills}" method="get">
-
-        <select
-            name="month"
-            class="month-select"
-            onchange="this.form.submit()">
-
-            <option
-                th:each="month : ${months}"
-                th:value="${month}"
-                th:text="${month + '月'}"
-                th:selected="${month == selectedMonth}">
-            </option>
-
-        </select>
-
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="skills-logout-button">
+            ログアウト
+        </button>
     </form>
+</header>
 
-</div>
+<main class="skills-main">
 
-            <section class="skill-card">
+    <div class="skills-container">
 
-    <div class="skill-card-header">
-        <h2>バックエンド</h2>
+        <div class="month-select-area">
 
-        <button type="button" class="add-button">
-            項目を追加する
-        </button>
-    </div>
+            <form th:action="@{/skills}" method="get">
 
-    <div class="skill-table-wrapper">
-        <table class="skill-table">
+                <select
+                    name="month"
+                    class="month-select"
+                    onchange="this.form.submit()">
 
-            <thead>
-                <tr>
-                    <th>項目名</th>
-                    <th>学習時間</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
+                    <option
+                        th:each="month : ${months}"
+                        th:value="${month}"
+                        th:text="${month + '月'}"
+                        th:selected="${month == selectedMonth}">
+                    </option>
 
-            <tbody>
+                </select>
 
-                <tr th:each="skill : ${skillList}"
-                    th:if="${skill.category_name == 'バックエンド'}">
-
-                    <td th:text="${skill.skill_name}">
-                        項目名
-                    </td>
-
-                    <td>
-                        <input
-                            type="number"
-                            th:value="${skill.learning_minutes}"
-                            min="0"
-                            step="1">
-                    </td>
-
-                    <td>
-                        <button type="button" class="save-button">
-                            学習時間を保存する
-                        </button>
-                    </td>
-
-                    <td>
-                        <button type="button" class="delete-button">
-                            削除する
-                        </button>
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-    </div>
-
-</section>
-
-<section class="skill-card">
-
-    <div class="skill-card-header">
-        <h2>フロントエンド</h2>
-
-        <button type="button" class="add-button">
-            項目を追加する
-        </button>
-    </div>
-
-    <div class="skill-table-wrapper">
-    <table class="skill-table">
-
-        <thead>
-        <tr>
-            <th>項目名</th>
-            <th>学習時間</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-        <tr th:each="skill : ${skillList}"
-            th:if="${skill.category_name == 'フロントエンド'}">
-
-            <td th:text="${skill.skill_name}">
-                項目名
-            </td>
-
-            <td>
-                <input
-                    type="number"
-                     th:value="${skill.learning_minutes}"
-                    min="0"
-                    step="1">
-            </td>
-
-            <td>
-                <button class="save-button">
-                    学習時間を保存する
-                </button>
-            </td>
-
-            <td>
-                <button class="delete-button">
-                    削除する
-                </button>
-            </td>
-
-        </tr>
-
-        </tbody>
-
-    </table>
-    </div>
-
-</section>
-
-
-<section class="skill-card">
-
-    <div class="skill-card-header">
-        <h2>インフラ</h2>
-
-        <button type="button" class="add-button">
-            項目を追加する
-        </button>
-    </div>
-
-    <div class="skill-table-wrapper">
-    <table class="skill-table">
-
-        <thead>
-        <tr>
-            <th>項目名</th>
-            <th>学習時間</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-        <tr th:each="skill : ${skillList}"
-            th:if="${skill.category_name == 'インフラ'}">
-
-            <td th:text="${skill.skill_name}">
-                項目名
-            </td>
-
-            <td>
-                <input
-                    type="number"
-                     th:value="${skill.learning_minutes}"
-                    min="0"
-                    step="1">
-            </td>
-
-            <td>
-                <button class="save-button">
-                    学習時間を保存する
-                </button>
-            </td>
-
-            <td>
-                <button class="delete-button">
-                    削除する
-                </button>
-            </td>
-
-        </tr>
-
-        </tbody>
-
-    </table>
-    </div>
-
-
-</section>
+            </form>
 
         </div>
 
-    </main>
 
-    <footer class="skills-footer">
-        portfolio site
-    </footer>
+        <!-- バックエンド -->
+        <section class="skill-card">
+
+            <div class="skill-card-header">
+
+                <h2>バックエンド</h2>
+
+                <a
+                    th:href="@{/skills/new(categoryId=1, month=${selectedMonth})}"
+                    class="add-button">
+                    項目を追加する
+                </a>
+
+            </div>
+
+            <div class="skill-table-wrapper">
+
+                <table class="skill-table">
+
+                    <thead>
+                    <tr>
+                        <th>項目名</th>
+                        <th>学習時間</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                   <tr
+    th:each="skill : ${skillList}"
+    th:if="${skill.category_name == 'バックエンド'}">
+
+    <td th:text="${skill.skill_name}">
+        項目名
+    </td>
+
+    <td>
+        <form
+            th:action="@{/skills/update}"
+            method="post"
+            th:id="${'update-form-' + skill.skill_id}">
+
+            <input
+                type="hidden"
+                name="skillId"
+                th:value="${skill.skill_id}">
+
+            <input
+                type="hidden"
+                name="month"
+                th:value="${selectedMonth}">
+
+            <input
+                type="number"
+                name="learningMinutes"
+                th:value="${skill.learning_minutes}"
+                min="0"
+                step="1">
+        </form>
+    </td>
+
+    <td>
+        <button
+            type="submit"
+            class="save-button"
+            th:form="${'update-form-' + skill.skill_id}">
+            学習時間を保存する
+        </button>
+    </td>
+
+    <td>
+    <form
+        th:action="@{/skills/delete}"
+        method="post">
+
+        <input
+            type="hidden"
+            name="skillId"
+            th:value="${skill.skill_id}">
+
+        <input
+            type="hidden"
+            name="month"
+            th:value="${selectedMonth}">
+
+        <button
+            type="submit"
+            class="delete-button">
+            削除する
+        </button>
+
+    </form>
+</td>
+
+</tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- フロントエンド -->
+        <section class="skill-card">
+
+            <div class="skill-card-header">
+
+                <h2>フロントエンド</h2>
+
+                <a
+                    th:href="@{/skills/new(categoryId=2, month=${selectedMonth})}"
+                    class="add-button">
+                    項目を追加する
+                </a>
+
+            </div>
+
+            <div class="skill-table-wrapper">
+
+                <table class="skill-table">
+
+                    <thead>
+                    <tr>
+                        <th>項目名</th>
+                        <th>学習時間</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr
+    th:each="skill : ${skillList}"
+    th:if="${skill.category_name == 'フロントエンド'}">
+
+    <td th:text="${skill.skill_name}">
+        項目名
+    </td>
+
+    <td>
+        <form
+            th:action="@{/skills/update}"
+            method="post"
+            th:id="${'update-form-' + skill.skill_id}">
+
+            <input
+                type="hidden"
+                name="skillId"
+                th:value="${skill.skill_id}">
+
+            <input
+                type="hidden"
+                name="month"
+                th:value="${selectedMonth}">
+
+            <input
+                type="number"
+                name="learningMinutes"
+                th:value="${skill.learning_minutes}"
+                min="0"
+                step="1">
+        </form>
+    </td>
+
+    <td>
+        <button
+            type="submit"
+            class="save-button"
+            th:form="${'update-form-' + skill.skill_id}">
+            学習時間を保存する
+        </button>
+    </td>
+
+    <td>
+    <form
+        th:action="@{/skills/delete}"
+        method="post">
+
+        <input
+            type="hidden"
+            name="skillId"
+            th:value="${skill.skill_id}">
+
+        <input
+            type="hidden"
+            name="month"
+            th:value="${selectedMonth}">
+
+        <button
+            type="submit"
+            class="delete-button">
+            削除する
+        </button>
+
+    </form>
+</td>
+
+</tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- インフラ -->
+        <section class="skill-card">
+
+            <div class="skill-card-header">
+
+                <h2>インフラ</h2>
+
+                <a
+                    th:href="@{/skills/new(categoryId=3, month=${selectedMonth})}"
+                    class="add-button">
+                    項目を追加する
+                </a>
+
+            </div>
+
+            <div class="skill-table-wrapper">
+
+                <table class="skill-table">
+
+                    <thead>
+                    <tr>
+                        <th>項目名</th>
+                        <th>学習時間</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr
+    th:each="skill : ${skillList}"
+    th:if="${skill.category_name == 'インフラ'}">
+
+    <td th:text="${skill.skill_name}">
+        項目名
+    </td>
+
+    <td>
+        <form
+            th:action="@{/skills/update}"
+            method="post"
+            th:id="${'update-form-' + skill.skill_id}">
+
+            <input
+                type="hidden"
+                name="skillId"
+                th:value="${skill.skill_id}">
+
+            <input
+                type="hidden"
+                name="month"
+                th:value="${selectedMonth}">
+
+            <input
+                type="number"
+                name="learningMinutes"
+                th:value="${skill.learning_minutes}"
+                min="0"
+                step="1">
+        </form>
+    </td>
+
+    <td>
+        <button
+            type="submit"
+            class="save-button"
+            th:form="${'update-form-' + skill.skill_id}">
+            学習時間を保存する
+        </button>
+    </td>
+
+    <td>
+    <form
+        th:action="@{/skills/delete}"
+        method="post">
+
+        <input
+            type="hidden"
+            name="skillId"
+            th:value="${skill.skill_id}">
+
+        <input
+            type="hidden"
+            name="month"
+            th:value="${selectedMonth}">
+
+        <button
+            type="submit"
+            class="delete-button">
+            削除する
+        </button>
+
+    </form>
+</td>
+
+</tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+<footer class="skills-footer">
+    portfolio site
+</footer>
 
 </body>
 

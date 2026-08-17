@@ -237,29 +237,238 @@ public String showSkills(
     }
 
     List<Map<String, Object>> skillList = jdbcTemplate.queryForList(
-            """
-            SELECT
-                c.id AS category_id,
-                c.name AS category_name,
-                s.id AS skill_id,
-                s.name AS skill_name,
-                COALESCE(ld.learning_minutes, 0) AS learning_minutes
-            FROM categories c
-            JOIN skills s
-                ON c.id = s.category_id
-            LEFT JOIN learning_data ld
-                ON ld.skill_id = s.id
-                AND ld.user_id = ?
-                AND ld.learning_month = ?
-            ORDER BY c.id, s.id
-            """,
-            userId,
-            selectedLearningMonth
-    );
+        """
+        SELECT
+            c.id AS category_id,
+            c.name AS category_name,
+            s.id AS skill_id,
+            s.name AS skill_name,
+            ld.learning_minutes AS learning_minutes
+        FROM learning_data ld
+        JOIN skills s
+            ON ld.skill_id = s.id
+        JOIN categories c
+            ON s.category_id = c.id
+        WHERE ld.user_id = ?
+          AND ld.learning_month = ?
+        ORDER BY c.id, s.id
+        """,
+        userId,
+        selectedLearningMonth
+);
 
     model.addAttribute("skillList", skillList);
 
     return "skills";
+}
+
+@GetMapping("/skills/new")
+public String showNewSkill(
+        @RequestParam Integer categoryId,
+        @RequestParam Integer month,
+        HttpSession session,
+        Model model) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    String categoryName = jdbcTemplate.queryForObject(
+            "SELECT name FROM categories WHERE id = ?",
+            String.class,
+            categoryId
+    );
+
+    model.addAttribute("categoryId", categoryId);
+    model.addAttribute("categoryName", categoryName);
+    model.addAttribute("month", month);
+
+    return "newSkill";
+}
+
+@PostMapping("/skills/new")
+public String addNewSkill(
+        @RequestParam Integer categoryId,
+        @RequestParam Integer month,
+        @RequestParam(required = false) String skillName,
+        @RequestParam(required = false) Integer learningMinutes,
+        HttpSession session,
+        Model model) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    boolean hasError = false;
+
+    String trimmedSkillName =
+            skillName == null ? "" : skillName.trim();
+
+    model.addAttribute("categoryId", categoryId);
+    model.addAttribute("month", month);
+    model.addAttribute("skillName", skillName);
+    model.addAttribute("learningMinutes", learningMinutes);
+
+    String categoryName = jdbcTemplate.queryForObject(
+            "SELECT name FROM categories WHERE id = ?",
+            String.class,
+            categoryId
+    );
+
+    model.addAttribute("categoryName", categoryName);
+
+    // 項目名バリデーション
+    if (trimmedSkillName.isEmpty()) {
+
+        model.addAttribute(
+                "skillNameError",
+                "項目名は必ず入力してください"
+        );
+
+        hasError = true;
+
+    } else if (trimmedSkillName.length() > 50) {
+
+        model.addAttribute(
+                "skillNameError",
+                "項目名は50文字以内で入力してください"
+        );
+
+        hasError = true;
+    }
+
+    // 学習時間バリデーション
+    if (learningMinutes == null) {
+
+        model.addAttribute(
+                "learningMinutesError",
+                "学習時間は必ず入力してください"
+        );
+
+        hasError = true;
+
+    } else if (learningMinutes < 0) {
+
+        model.addAttribute(
+                "learningMinutesError",
+                "学習時間は0以上の数字で入力してください"
+        );
+
+        hasError = true;
+    }
+
+    if (hasError) {
+        return "newSkill";
+    }
+
+    // ログインユーザーID取得
+    Integer userId = jdbcTemplate.queryForObject(
+            "SELECT id FROM users WHERE email = ?",
+            Integer.class,
+            loginUserEmail
+    );
+
+    // 選択された月をlearning_monthへ変換
+    java.time.LocalDate today = java.time.LocalDate.now();
+    java.time.LocalDate selectedLearningMonth = null;
+
+    for (int i = 0; i < 4; i++) {
+
+        java.time.LocalDate candidate =
+                today.minusMonths(i).withDayOfMonth(1);
+
+        if (candidate.getMonthValue() == month) {
+            selectedLearningMonth = candidate;
+            break;
+        }
+    }
+
+    if (selectedLearningMonth == null) {
+        return "redirect:/skills";
+    }
+
+    // 同じ月・同じカテゴリ・同じ項目名だけ重複エラー
+    Integer duplicateCount = jdbcTemplate.queryForObject(
+            """
+            SELECT COUNT(*)
+            FROM learning_data ld
+            JOIN skills s
+                ON ld.skill_id = s.id
+            WHERE ld.user_id = ?
+              AND ld.learning_month = ?
+              AND s.category_id = ?
+              AND s.name = ?
+            """,
+            Integer.class,
+            userId,
+            selectedLearningMonth,
+            categoryId,
+            trimmedSkillName
+    );
+
+    if (duplicateCount != null && duplicateCount > 0) {
+
+        model.addAttribute(
+                "skillNameError",
+                trimmedSkillName + "は既に登録されています"
+        );
+
+        return "newSkill";
+    }
+
+    // skillsテーブルへ項目追加
+    jdbcTemplate.update(
+            """
+            INSERT INTO skills (category_id, name)
+            VALUES (?, ?)
+            """,
+            categoryId,
+            trimmedSkillName
+    );
+
+    // 今追加したskillのID取得
+    Integer skillId = jdbcTemplate.queryForObject(
+            """
+            SELECT id
+            FROM skills
+            WHERE category_id = ?
+              AND name = ?
+            ORDER BY id DESC
+            LIMIT 1
+            """,
+            Integer.class,
+            categoryId,
+            trimmedSkillName
+    );
+
+    // 選択された月だけlearning_dataへ登録
+    jdbcTemplate.update(
+            """
+            INSERT INTO learning_data
+                (user_id, skill_id, learning_minutes, learning_month)
+            VALUES (?, ?, ?, ?)
+            """,
+            userId,
+            skillId,
+            learningMinutes,
+            selectedLearningMonth
+    );
+
+    // 登録完了モーダル
+    model.addAttribute("categoryId", categoryId);
+    model.addAttribute("categoryName", categoryName);
+    model.addAttribute("month", month);
+    model.addAttribute("registeredSkillName", trimmedSkillName);
+    model.addAttribute("registeredLearningMinutes", learningMinutes);
+    model.addAttribute("registrationComplete", true);
+
+    return "newSkill";
 }
 
 @PostMapping("/skills/save")
@@ -317,6 +526,130 @@ public String saveLearningTime(
             learningMinutes,
             selectedLearningMonth
     );
+
+    return "redirect:/skills?month=" + month;
+}
+
+@PostMapping("/skills/delete")
+public String deleteSkill(
+        @RequestParam Integer skillId,
+        @RequestParam Integer month,
+        HttpSession session) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    // 先に学習時間データを削除
+    jdbcTemplate.update(
+            """
+            DELETE FROM learning_data
+            WHERE skill_id = ?
+            """,
+            skillId
+    );
+
+    // その後、項目自体を削除
+    jdbcTemplate.update(
+            """
+            DELETE FROM skills
+            WHERE id = ?
+            """,
+            skillId
+    );
+
+    return "redirect:/skills?month=" + month;
+}
+
+@PostMapping("/skills/update")
+public String updateLearningMinutes(
+        @RequestParam Integer skillId,
+        @RequestParam Integer month,
+        @RequestParam Integer learningMinutes,
+        HttpSession session) {
+
+    String loginUserEmail =
+            (String) session.getAttribute("loginUserEmail");
+
+    if (loginUserEmail == null) {
+        return "redirect:/login";
+    }
+
+    if (learningMinutes == null || learningMinutes < 0) {
+        return "redirect:/skills?month=" + month;
+    }
+
+    Integer userId = jdbcTemplate.queryForObject(
+            "SELECT id FROM users WHERE email = ?",
+            Integer.class,
+            loginUserEmail
+    );
+
+    java.time.LocalDate today = java.time.LocalDate.now();
+    java.time.LocalDate selectedLearningMonth = null;
+
+    for (int i = 0; i < 4; i++) {
+
+        java.time.LocalDate candidate =
+                today.minusMonths(i).withDayOfMonth(1);
+
+        if (candidate.getMonthValue() == month) {
+            selectedLearningMonth = candidate;
+            break;
+        }
+    }
+
+    if (selectedLearningMonth == null) {
+        return "redirect:/skills";
+    }
+
+    Integer count = jdbcTemplate.queryForObject(
+            """
+            SELECT COUNT(*)
+            FROM learning_data
+            WHERE user_id = ?
+              AND skill_id = ?
+              AND learning_month = ?
+            """,
+            Integer.class,
+            userId,
+            skillId,
+            selectedLearningMonth
+    );
+
+    if (count != null && count > 0) {
+
+        jdbcTemplate.update(
+                """
+                UPDATE learning_data
+                SET learning_minutes = ?
+                WHERE user_id = ?
+                  AND skill_id = ?
+                  AND learning_month = ?
+                """,
+                learningMinutes,
+                userId,
+                skillId,
+                selectedLearningMonth
+        );
+
+    } else {
+
+        jdbcTemplate.update(
+                """
+                INSERT INTO learning_data
+                    (user_id, skill_id, learning_minutes, learning_month)
+                VALUES (?, ?, ?, ?)
+                """,
+                userId,
+                skillId,
+                learningMinutes,
+                selectedLearningMonth
+        );
+    }
 
     return "redirect:/skills?month=" + month;
 }
