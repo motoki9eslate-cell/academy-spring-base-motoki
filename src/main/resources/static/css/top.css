@@ -3151,3 +3151,9 @@ body.new-skill-page {
 
     border-radius: 4px;
 }
+
+.no-data-message {
+    text-align: center;
+    padding: 40px 0;
+    color: #666;
+}

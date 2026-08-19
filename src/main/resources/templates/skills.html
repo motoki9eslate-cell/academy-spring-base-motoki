@@ -78,7 +78,11 @@
                     </thead>
 
                     <tbody>
-
+                    <tr th:if="${#lists.isEmpty(skillList.?[category_name == 'バックエンド'])}">
+    <td colspan="4" class="no-data-message">
+        表示するデータがありません。
+    </td>
+</tr>
                    <tr
     th:each="skill : ${skillList}"
     th:if="${skill.category_name == 'バックエンド'}">
@@ -185,7 +189,11 @@
                     </thead>
 
                     <tbody>
-
+                    <tr th:if="${#lists.isEmpty(skillList.?[category_name == 'フロントエンド'])}">
+    <td colspan="4" class="no-data-message">
+        表示するデータがありません。
+    </td>
+</tr>
                     <tr
     th:each="skill : ${skillList}"
     th:if="${skill.category_name == 'フロントエンド'}">
@@ -292,7 +300,11 @@
                     </thead>
 
                     <tbody>
-
+                    <tr th:if="${#lists.isEmpty(skillList.?[category_name == 'インフラ'])}">
+    <td colspan="4" class="no-data-message">
+        表示するデータがありません。
+    </td>
+</tr>
                     <tr
     th:each="skill : ${skillList}"
     th:if="${skill.category_name == 'インフラ'}">

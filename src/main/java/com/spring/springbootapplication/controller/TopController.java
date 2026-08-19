@@ -225,6 +225,7 @@ public String showSkills(
             today.withDayOfMonth(1);
 
     if (month != null) {
+
         for (int i = 0; i < 4; i++) {
 
             java.time.LocalDate candidate =
@@ -244,14 +245,14 @@ public String showSkills(
                 c.name AS category_name,
                 s.id AS skill_id,
                 s.name AS skill_name,
-                COALESCE(ld.learning_minutes, 0) AS learning_minutes
-            FROM categories c
+                ld.learning_minutes AS learning_minutes
+            FROM learning_data ld
             JOIN skills s
-                ON c.id = s.category_id
-            LEFT JOIN learning_data ld
                 ON ld.skill_id = s.id
-                AND ld.user_id = ?
-                AND ld.learning_month = ?
+            JOIN categories c
+                ON s.category_id = c.id
+            WHERE ld.user_id = ?
+              AND ld.learning_month = ?
             ORDER BY c.id, s.id
             """,
             userId,
@@ -545,23 +546,71 @@ public String deleteSkill(
             skillId
     );
 
-    // 学習時間データを削除
+    // ログインユーザーIDを取得
+    Integer userId = jdbcTemplate.queryForObject(
+            """
+            SELECT id
+            FROM users
+            WHERE email = ?
+            """,
+            Integer.class,
+            loginUserEmail
+    );
+
+    // 選択された月を learning_month に変換
+    java.time.LocalDate today = java.time.LocalDate.now();
+    java.time.LocalDate selectedLearningMonth = null;
+
+    for (int i = 0; i < 4; i++) {
+
+        java.time.LocalDate candidate =
+                today.minusMonths(i).withDayOfMonth(1);
+
+        if (candidate.getMonthValue() == month) {
+            selectedLearningMonth = candidate;
+            break;
+        }
+    }
+
+    if (selectedLearningMonth == null) {
+        return "redirect:/skills";
+    }
+
+    // 選択した月のデータだけ削除
     jdbcTemplate.update(
             """
             DELETE FROM learning_data
+            WHERE user_id = ?
+              AND skill_id = ?
+              AND learning_month = ?
+            """,
+            userId,
+            skillId,
+            selectedLearningMonth
+    );
+
+    // このskillが他の月でも使用されているか確認
+    Integer remainingCount = jdbcTemplate.queryForObject(
+            """
+            SELECT COUNT(*)
+            FROM learning_data
             WHERE skill_id = ?
             """,
+            Integer.class,
             skillId
     );
 
-    // 項目を削除
-    jdbcTemplate.update(
-            """
-            DELETE FROM skills
-            WHERE id = ?
-            """,
-            skillId
-    );
+    // どの月でも使用されていなければskillsからも削除
+    if (remainingCount != null && remainingCount == 0) {
+
+        jdbcTemplate.update(
+                """
+                DELETE FROM skills
+                WHERE id = ?
+                """,
+                skillId
+        );
+    }
 
     // 削除完了モーダル用
     redirectAttributes.addFlashAttribute(
