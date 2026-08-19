@@ -309,116 +309,74 @@ public String addNewSkill(
 
     boolean hasError = false;
 
-model.addAttribute("categoryId", categoryId);
-model.addAttribute("month", month);
-model.addAttribute("skillName", skillName);
-model.addAttribute("learningMinutes", learningMinutes);
+    String trimmedSkillName =
+            skillName == null ? "" : skillName.trim();
 
-String categoryName = jdbcTemplate.queryForObject(
-        "SELECT name FROM categories WHERE id = ?",
-        String.class,
-        categoryId
-);
+    model.addAttribute("categoryId", categoryId);
+    model.addAttribute("month", month);
+    model.addAttribute("skillName", skillName);
+    model.addAttribute("learningMinutes", learningMinutes);
 
-model.addAttribute("categoryName", categoryName);
-
-if (skillName == null || skillName.trim().isEmpty()) {
-
-    model.addAttribute(
-            "skillNameError",
-            "項目名は必ず入力してください"
+    String categoryName = jdbcTemplate.queryForObject(
+            "SELECT name FROM categories WHERE id = ?",
+            String.class,
+            categoryId
     );
 
-    hasError = true;
+    model.addAttribute("categoryName", categoryName);
 
-} else if (skillName.trim().length() > 50) {
+    // 項目名バリデーション
+    if (trimmedSkillName.isEmpty()) {
 
-    model.addAttribute(
-            "skillNameError",
-            "項目名は50文字以内で入力してください"
-    );
+        model.addAttribute(
+                "skillNameError",
+                "項目名は必ず入力してください"
+        );
 
-    hasError = true;
-}
+        hasError = true;
 
-if (learningMinutes == null) {
+    } else if (trimmedSkillName.length() > 50) {
 
-    model.addAttribute(
-            "learningMinutesError",
-            "学習時間は必ず入力してください"
-    );
+        model.addAttribute(
+                "skillNameError",
+                "項目名は50文字以内で入力してください"
+        );
 
-    hasError = true;
+        hasError = true;
+    }
 
-} else if (learningMinutes < 0) {
+    // 学習時間バリデーション
+    if (learningMinutes == null) {
 
-    model.addAttribute(
-            "learningMinutesError",
-            "学習時間は0以上の数字で入力してください"
-    );
+        model.addAttribute(
+                "learningMinutesError",
+                "学習時間は必ず入力してください"
+        );
 
-    hasError = true;
-}
+        hasError = true;
 
-if (hasError) {
-    return "newSkill";
-}
+    } else if (learningMinutes < 0) {
 
-Integer duplicateCount = jdbcTemplate.queryForObject(
-        """
-        SELECT COUNT(*)
-        FROM skills
-        WHERE category_id = ?
-          AND name = ?
-        """,
-        Integer.class,
-        categoryId,
-        skillName == null ? "" : skillName.trim()
-);
+        model.addAttribute(
+                "learningMinutesError",
+                "学習時間は0以上の数字で入力してください"
+        );
 
-if (duplicateCount != null && duplicateCount > 0) {
+        hasError = true;
+    }
 
-    model.addAttribute(
-            "skillNameError",
-            skillName == null ? "" : skillName.trim() + "は既に登録されています"
-    );
+    if (hasError) {
+        return "newSkill";
+    }
 
-    return "newSkill";
-}
-
-    // ① skillsテーブルへ項目を追加
-    jdbcTemplate.update(
-            """
-            INSERT INTO skills (category_id, name)
-            VALUES (?, ?)
-            """,
-            categoryId,
-            skillName == null ? "" : skillName.trim()
-    );
-
-    // ② 今追加したskillのidを取得
-    Integer skillId = jdbcTemplate.queryForObject(
-            """
-            SELECT id
-            FROM skills
-            WHERE category_id = ?
-              AND name = ?
-            ORDER BY id DESC
-            LIMIT 1
-            """,
-            Integer.class,
-            categoryId,
-            skillName == null ? "" : skillName.trim()
-    );
-
-    // ③ ログインユーザーのidを取得
+    // ログインユーザーID取得
     Integer userId = jdbcTemplate.queryForObject(
             "SELECT id FROM users WHERE email = ?",
             Integer.class,
             loginUserEmail
     );
 
-    // ④ 選択された月をlearning_monthに変換
+    // 選択月を learning_month に変換
     java.time.LocalDate today = java.time.LocalDate.now();
     java.time.LocalDate selectedLearningMonth = null;
 
@@ -437,7 +395,79 @@ if (duplicateCount != null && duplicateCount > 0) {
         return "redirect:/skills";
     }
 
-    // ⑤ learning_dataへ学習時間を登録
+    // 同じカテゴリ・同じ項目名のskillが既に存在するか確認
+    List<Integer> existingSkillIds = jdbcTemplate.queryForList(
+            """
+            SELECT id
+            FROM skills
+            WHERE category_id = ?
+              AND name = ?
+            """,
+            Integer.class,
+            categoryId,
+            trimmedSkillName
+    );
+
+    Integer skillId;
+
+    if (!existingSkillIds.isEmpty()) {
+
+        // 既存のskillを再利用
+        skillId = existingSkillIds.get(0);
+
+        // 同じ月に既に登録済みか確認
+        Integer duplicateCount = jdbcTemplate.queryForObject(
+                """
+                SELECT COUNT(*)
+                FROM learning_data
+                WHERE user_id = ?
+                  AND skill_id = ?
+                  AND learning_month = ?
+                """,
+                Integer.class,
+                userId,
+                skillId,
+                selectedLearningMonth
+        );
+
+        if (duplicateCount != null && duplicateCount > 0) {
+
+            model.addAttribute(
+                    "skillNameError",
+                    trimmedSkillName + "は既に登録されています"
+            );
+
+            return "newSkill";
+        }
+
+    } else {
+
+        // skillsに存在しない場合のみ新規作成
+        jdbcTemplate.update(
+                """
+                INSERT INTO skills (category_id, name)
+                VALUES (?, ?)
+                """,
+                categoryId,
+                trimmedSkillName
+        );
+
+        skillId = jdbcTemplate.queryForObject(
+                """
+                SELECT id
+                FROM skills
+                WHERE category_id = ?
+                  AND name = ?
+                ORDER BY id DESC
+                LIMIT 1
+                """,
+                Integer.class,
+                categoryId,
+                trimmedSkillName
+        );
+    }
+
+    // 選択月のlearning_dataを登録
     jdbcTemplate.update(
             """
             INSERT INTO learning_data
@@ -450,16 +480,15 @@ if (duplicateCount != null && duplicateCount > 0) {
             selectedLearningMonth
     );
 
-model.addAttribute("categoryId", categoryId);
-model.addAttribute("categoryName", categoryName);
-model.addAttribute("month", month);
+    model.addAttribute("categoryId", categoryId);
+    model.addAttribute("categoryName", categoryName);
+    model.addAttribute("month", month);
 
-model.addAttribute("registeredSkillName", skillName == null ? "" : skillName.trim());
-model.addAttribute("registeredLearningMinutes", learningMinutes);
+    model.addAttribute("registeredSkillName", trimmedSkillName);
+    model.addAttribute("registeredLearningMinutes", learningMinutes);
+    model.addAttribute("registrationComplete", true);
 
-model.addAttribute("registrationComplete", true);
-
-return "newSkill";
+    return "newSkill";
 }
 
 @PostMapping("/skills/save")
