@@ -6,7 +6,7 @@ body {
 }
 
 header {
-  height: 80px;
+  height: 120px;
   background: #1B5678;
   color: white;
   display: flex;
@@ -40,47 +40,13 @@ main {
     min-height: calc(100vh - 120px);
 }
 
-.profile-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 80px;
-}
-
 .profile-left {
-  text-align: center;
-}
-
-.profile-image {
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #ddd;
-}
-
-.profile-left p {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
+    width: 220px;
+    text-align: center;
 }
 
 .profile-right {
-  width: 360px;
-}
-
-.profile-right h2 {
-  margin: 0;
-  font-size: 32px;
-  font-weight: bold;
-  text-align: left;
-}
-
-.chart-section h2 {
-  margin: 0;
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
+    width: 320px;
 }
 
 .line {
@@ -98,27 +64,7 @@ main {
   font-size: 15px;
   line-height: 1.9;
   text-align: left;
-}
-
-.edit-button {
-  width: 200px;
-  height: 46px;
-  background: #1B5678;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  display: block;
-}
-
-.profile-button {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.chart-section {
-  text-align: center;
-  margin-top: 90px;
+  width:320px;
 }
 
 .chart-line {
@@ -129,22 +75,6 @@ main {
 /* 自己紹介：タイトル・本文と同じ左端に揃える */
 .profile-right .edit-button {
   margin: 24px 0 0;
-}
-
-/* 学習チャート：中央に配置する */
-.chart-section .edit-button {
-  margin: 24px auto 0;
-}
-
-.chart-area {
-  width: 720px;
-  height: 330px;
-  margin: 24px auto 80px;
-  border: 1px solid #eee;
-  color: #555;
-  font-size: 12px;
-  padding-top: 20px;
-  box-sizing: border-box;
 }
 
 footer {
@@ -222,7 +152,7 @@ footer {
 
 /* ログイン画面のヘッダー */
 .login-page header {
-  height: 80px;
+  height: 120px;
   padding: 0 40px;
   background: #1B5678;
   color: white;
@@ -369,4 +299,2737 @@ footer {
 
 .logout-button:hover {
   opacity: 0.85;
+}
+
+/* 自己紹介編集画面 */
+.edit-profile-page {
+    min-height: 100vh;
+    margin: 0;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-profile-page .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 120px;
+    padding: 0 48px;
+    background-color: #1b5f82;
+}
+
+.edit-profile-page .header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 32px;
+}
+
+.edit-profile-page .header form {
+    margin: 0;
+}
+
+.edit-profile-page .header button {
+    width: 130px;
+    height: 42px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.edit-profile-main {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 48px 20px 80px;
+    padding-top:50px;
+}
+
+.edit-profile-main h2 {
+    margin: 0 0 52px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.edit-profile-form {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.edit-profile-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.edit-profile-field label {
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #555555;
+}
+
+.edit-profile-field textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: 92px;
+    min-height: 92px;
+    padding: 6px 0;
+    border: none;
+    border-bottom: 1px solid #555555;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.2;
+    resize: none;
+    outline: none;
+}
+
+.edit-profile-field textarea:focus {
+    border-bottom: 2px solid #1b5f82;
+}
+
+.edit-profile-note {
+    margin: 5px 0 0;
+    font-size: 10px;
+    color: #777777;
+}
+
+.edit-profile-error {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: #d90000;
+}
+
+.edit-profile-field input[type="file"] {
+    font-size: 11px;
+}
+
+.edit-profile-submit {
+    display: block;
+    width: 270px;
+    height: 44px;
+    margin: 36px auto 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #1b5f82;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.edit-profile-submit:hover {
+    opacity: 0.9;
+}
+
+.edit-profile-footer {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 42px;
+    padding: 10px;
+    background-color: #1b5f82;
+    color: #ffffff;
+    text-align: center;
+}
+
+.edit-profile-field textarea:focus {
+    border-bottom: 2px solid #1b5f82;
+}
+
+.edit-profile-note {
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: #777777;
+}
+
+.edit-profile-error {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: #d90000;
+}
+
+.edit-profile-field input[type="file"] {
+    font-size: 14px;
+}
+
+.edit-profile-submit {
+    display: block;
+    width: 320px;
+    height: 54px;
+    margin: 50px auto 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #1b5f82;
+    color: #ffffff;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.edit-profile-submit:hover {
+    opacity: 0.9;
+}
+
+.edit-profile-footer {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 42px;
+    padding: 10px;
+    background-color: #1b5f82;
+    color: #ffffff;
+    text-align: center;
+}
+
+.profile-image-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =========================
+   共通デザイン
+========================= */
+
+/* ヘッダー */
+header,
+.edit-profile-page .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+    padding: 0 48px;
+    background-color: #1b5f82;
+}
+
+header h1,
+.edit-profile-page .header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* ログアウトボタン */
+.logout-button,
+.edit-profile-page .header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 130px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 見出し・タイトル */
+.edit-profile-main h2 {
+    color: #333333;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* 共通の青いボタン */
+.edit-button,
+.profile-button .edit-button,
+.edit-profile-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 270px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #1b5f82;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit-button:hover,
+.profile-button .edit-button:hover,
+.edit-profile-submit:hover,
+.logout-button:hover,
+.edit-profile-page .header button:hover {
+    opacity: 0.9;
+}
+
+/* フッター */
+footer,
+.edit-profile-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 42px;
+    min-height: 42px;
+    padding: 0;
+    background-color: #1b5f82;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* ========================================
+   WF最終版
+   必ずtop.cssの一番下に置く
+======================================== */
+
+/* ---------- 共通 ---------- */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: sans-serif;
+    background-color: #ffffff;
+}
+
+header,
+.edit-profile-page .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    min-height: 80px;
+    padding: 0 40px;
+    background-color: #1b5678;
+}
+
+header h1,
+.edit-profile-page .header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.logout-form,
+.edit-profile-page .header form {
+    margin: 0;
+}
+
+.logout-button,
+.edit-profile-page .header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 90px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+footer,
+.edit-profile-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    padding: 0;
+    background-color: #1b5678;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+/* ---------- TOP画面 ---------- */
+
+body > main {
+    padding-top: 0;
+}
+
+.profile-right {
+    box-sizing: border-box;
+    width: 300px;
+    padding-top: 18px;
+    text-align: left;
+}
+
+.profile-right h2 {
+    margin: 0;
+    color: #333333;
+    font-size: 36px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.profile-right .line {
+    width: 130px;
+    margin: 7px 0 14px;
+    border-bottom: 1px solid #999999;
+}
+
+.profile-introduction,
+.profile-right p {
+    width: 100%;
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.55;
+    text-align: left;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- 自己紹介編集画面 ---------- */
+
+.edit-profile-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-profile-main {
+    flex: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 44px 20px 60px;
+}
+
+.edit-profile-main h2 {
+    margin: 0 0 48px;
+    color: #333333;
+    font-size: 36px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.edit-profile-form {
+    width: 330px;
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+}
+
+.edit-profile-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 28px;
+}
+
+.edit-profile-field label {
+    margin-bottom: 5px;
+    color: #555555;
+    font-size: 9px;
+}
+
+.edit-profile-field textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: 74px;
+    min-height: 74px;
+    padding: 4px 0;
+    border: none;
+    border-bottom: 1px solid #555555;
+    border-radius: 0;
+    outline: none;
+    resize: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 10px;
+    line-height: 1.15;
+}
+
+.edit-profile-field textarea:focus {
+    border-bottom: 1px solid #555555;
+}
+
+.edit-profile-note {
+    margin: 4px 0 0;
+    color: #777777;
+    font-size: 8px;
+}
+
+.edit-profile-error {
+    margin: 5px 0 0;
+    color: #d90000;
+    font-size: 10px;
+}
+
+.edit-profile-field input[type="file"] {
+    font-size: 9px;
+}
+
+.edit-profile-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 210px;
+    height: 37px;
+    margin: 30px auto 0;
+    padding: 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #1b5678;
+    color: #ffffff;
+    font-size: 11px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* ---------- ホバー ---------- */
+
+.logout-button:hover,
+.edit-profile-page .header button:hover,
+.profile-button .edit-button:hover,
+.chart-section .edit-button:hover,
+.edit-profile-submit:hover {
+    opacity: 0.85;
+}
+
+/* ========================================
+   ファイル選択・ログアウトボタン最終調整
+======================================== */
+
+/* ファイル選択 */
+.profile-file-area {
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.profile-file-input {
+    display: none;
+}
+
+.profile-file-button {
+     display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:202px;
+    height:32px;
+
+    background:#eeeeee;
+    border:none;
+    border-radius:4px;
+
+    font-size:14px;
+    color:#555;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.profile-file-button:hover {
+    background-color: #e3e3e3;
+}
+
+.profile-file-name {
+    font-size:14px;
+    color:#333;
+}
+
+/* ログアウトボタン */
+.logout-button,
+.edit-profile-page .header button {
+    width: 90px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #ffffff;
+    color: #333333;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.profile-right {
+    width: 290px;
+    padding-top: 15px;
+}
+
+.profile-right .line {
+    width: 125px;
+}
+
+.chart-area {
+    height: 230px;
+}
+
+/* 自己紹介編集画面 */
+.edit-profile-main {
+    padding-top: 38px;
+}
+
+.edit-profile-main h2 {
+    margin-bottom: 42px;
+}
+
+.edit-profile-submit {
+    width: 190px;
+    height: 35px;
+}
+
+/* ========================================
+   ログイン・新規登録ページ共通
+======================================== */
+
+.auth-page {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    font-family: sans-serif;
+}
+
+/* 共通ヘッダー */
+.auth-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    min-height: 80px;
+    padding: 0 40px;
+    background-color: #1b5678;
+}
+
+.auth-header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.auth-header-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 90px;
+    height: 34px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+/* メイン */
+.auth-main {
+    flex: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 44px 20px 60px;
+}
+
+.auth-title {
+    margin: 0 0 48px;
+    color: #333333;
+    font-size: 28px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* フォーム */
+.auth-form {
+    width: 420px;
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+}
+
+.auth-field {
+    margin-bottom: 28px;
+}
+
+.auth-field label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333333;
+    font-size: 14px;
+}
+
+.auth-field input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid #999999;
+    outline: none;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.auth-field input:focus {
+    border-bottom: 1px solid #999999;
+}
+
+/* ボタン */
+.auth-submit-button,
+.auth-sub-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 220px;
+    height: 42px;
+    margin: 34px auto 0;
+    padding: 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #1b5678;
+    color: #ffffff;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.auth-sub-button {
+    margin-top: 14px;
+}
+
+/* エラー */
+.auth-error {
+    margin: 6px 0 0;
+    color: #d90000;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* フッター */
+.auth-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    background-color: #1b5678;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.login-header {
+    justify-content: center;
+}
+
+.login-header h1 {
+    margin: 0;
+}
+
+/* TOPページ専用 */
+
+.top-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+.top-page > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+    padding: 0 40px;
+    background-color: #1b5678;
+}
+
+.top-page > header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.top-page .logout-form {
+    margin: 0;
+}
+
+.top-page .logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 170px;
+    height: 53px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.75);
+    font-family: inherit;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.top-page > main {
+    flex: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 80px 20px;
+}
+
+.top-page .profile-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 960px;
+    max-width: 100%;
+    margin: 0 auto;
+    gap: 80px;
+}
+
+.top-page .profile-left {
+    flex: 0 0 340px;
+    width: 340px;
+    text-align: center;
+}
+
+.top-page .profile-image-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.top-page .profile-image,
+.top-page .profile-image-placeholder {
+    display: block;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+}
+
+.top-page .profile-image {
+    object-fit: cover;
+}
+
+.top-page .profile-image-placeholder {
+    background-color: #d9d9d9;
+}
+
+.top-page .profile-left p {
+    margin: 24px 0 0;
+    color: #111111;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.top-page .profile-right {
+    box-sizing: border-box;
+    flex: 0 0 420px;
+    width: 420px;
+    padding-top: 24px;
+    text-align: left;
+}
+
+.top-page .profile-right h2 {
+    margin: 0;
+    color: #333333;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: left;
+}
+
+.top-page .profile-right .line {
+    width: 250px;
+    margin: 16px 0 28px;
+    border: none;
+    border-bottom: 1px solid #999999;
+}
+
+.top-page .profile-introduction {
+    width: 100%;
+    margin: 0;
+    color: #222222;
+    font-size: 18px;
+    line-height: 1.7;
+    text-align: left;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.top-page .profile-button {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 32px;
+}
+
+.top-page .profile-button .edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 240px;
+    height: 53px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #1b5678;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.top-page .chart-section {
+    box-sizing: border-box;
+    width: 960px;
+    max-width: 100%;
+    margin: 80px auto 0;
+    text-align: center;
+}
+
+.top-page .chart-section h2 {
+    margin: 0;
+    color: #333333;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.top-page .chart-section .line {
+    width: 400px;
+    margin: 18px auto 0;
+    border: none;
+    border-bottom: 1px solid #999999;
+}
+
+.top-page .chart-section .edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 170px;
+    height: 53px;
+    margin: 32px auto 0;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #1b5678;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.top-page .chart-area {
+    box-sizing: border-box;
+    width: 800px;
+    max-width: 100%;
+    height: 420px;
+    margin: 60px auto 0;
+    padding-top: 24px;
+    border: 1px solid #eeeeee;
+    color: #555555;
+    font-size: 14px;
+    text-align: center;
+}
+
+.top-page > footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    padding: 0 40px;
+    background-color: #1b5678;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 18px;
+}
+
+/* ==================================================
+   自己紹介編集ページ専用
+================================================== */
+
+.edit-profile-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+/* ---------- ヘッダー ---------- */
+
+.edit-profile-page .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+    padding: 0 40px;
+
+    background-color: #1b5678;
+}
+
+.edit-profile-page .header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.edit-profile-page .header form {
+    margin: 0;
+}
+
+.edit-profile-page .header button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 170px;
+    height: 53px;
+    padding: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.75);
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+/* ---------- メイン ---------- */
+
+.edit-profile-main {
+    flex: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 80px 20px;
+}
+
+.edit-profile-main h2 {
+    margin: 0 0 80px;
+
+    color: #333333;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* ---------- フォーム全体 ---------- */
+
+.edit-profile-form {
+    width: 600px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.edit-profile-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 48px;
+}
+
+.edit-profile-field label {
+    margin-bottom: 10px;
+
+    color: #555555;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* ---------- 自己紹介入力欄 ---------- */
+
+.edit-profile-field textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: 140px;
+    min-height: 140px;
+    padding: 10px 0;
+
+    border: none;
+    border-bottom: 1px solid #555555;
+    border-radius: 0;
+    outline: none;
+    resize: none;
+
+    background-color: transparent;
+
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.edit-profile-field textarea:focus {
+    border-bottom: 1px solid #555555;
+}
+
+.edit-profile-note {
+    margin: 8px 0 0;
+    color: #777777;
+    font-size: 14px;
+}
+
+.edit-profile-error {
+    margin: 8px 0 0;
+    color: #ff0000;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* ---------- 画像選択 ---------- */
+
+.edit-profile-field input[type="file"] {
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* ---------- 保存ボタン ---------- */
+
+.edit-profile-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 320px;
+    height: 53px;
+    margin: 60px auto 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+.edit-profile-submit:hover,
+.edit-profile-page .header button:hover {
+    opacity: 0.85;
+}
+
+/* ---------- フッター ---------- */
+
+.edit-profile-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    padding: 0 40px;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+/* ---------- 画面幅が狭い場合 ---------- */
+
+@media screen and (max-width: 900px) {
+    .edit-profile-page .header {
+        height: 90px;
+        min-height: 90px;
+        padding: 0 24px;
+    }
+
+    .edit-profile-page .header h1 {
+        font-size: 28px;
+    }
+
+    .edit-profile-page .header button {
+        width: 120px;
+        height: 44px;
+        font-size: 15px;
+    }
+
+    .edit-profile-main {
+        padding: 60px 20px;
+    }
+
+    .edit-profile-main h2 {
+        margin-bottom: 60px;
+        font-size: 36px;
+    }
+
+    .edit-profile-form {
+        width: 100%;
+    }
+
+    .edit-profile-submit {
+        width: min(320px, 100%);
+    }
+}
+
+/* ==================================================
+   ログイン・新規登録ページ専用
+================================================== */
+
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+/* ---------- ヘッダー ---------- */
+
+.auth-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+    padding: 0 40px;
+
+    background-color: #1b5678;
+}
+
+.auth-header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* 新規登録ページだけ右側にログインボタンを置く */
+.auth-header.has-button {
+    justify-content: space-between;
+}
+
+.auth-header-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 170px;
+    height: 53px;
+    padding: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.75);
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+}
+
+/* ---------- メイン ---------- */
+
+.auth-main {
+    flex: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 80px 20px;
+}
+
+.auth-title {
+    margin: 0 0 80px;
+
+    color: #333333;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* ---------- フォーム ---------- */
+
+.auth-form {
+    width: 630px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 42px;
+}
+
+.auth-field label {
+    margin-bottom: 16px;
+
+    color: #111111;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.auth-field input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 56px;
+    padding: 0 0 8px;
+
+    border: none;
+    border-bottom: 1px solid #999999;
+    border-radius: 0;
+    outline: none;
+
+    background-color: transparent;
+
+    color: #222222;
+    font-family: inherit;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.auth-field input::placeholder {
+    color: #777777;
+    opacity: 1;
+}
+
+.auth-field input:focus {
+    border-bottom: 1px solid #555555;
+}
+
+/* ---------- エラー ---------- */
+
+.auth-error {
+    margin: 10px 0 0;
+
+    color: #ff0000;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* ---------- ボタン ---------- */
+
+.auth-submit-button,
+.auth-register-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 330px;
+    height: 64px;
+    margin: 50px auto 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.auth-register-button {
+    margin-top: 20px;
+}
+
+.auth-submit-button:hover,
+.auth-register-button:hover,
+.auth-header-button:hover {
+    opacity: 0.85;
+}
+
+/* ---------- フッター ---------- */
+
+.auth-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    padding: 0 40px;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.auth-error {
+  width: 100%;
+  margin: 8px 0 0;
+  color: #ff0000;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* ==================================================
+   項目一覧ページ
+================================================== */
+
+.skills-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+/* ---------- ヘッダー ---------- */
+
+ .skills-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 120px;
+    padding: 0 40px;
+
+    background-color: #1b5678;
+}
+
+.skills-header h1 {
+    margin: 0;
+
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+/* ---------- ログアウト ---------- */
+
+.skills-header form {
+    margin: 0;
+}
+
+.skills-logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 170px;
+    height: 53px;
+
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+    color: rgba(0, 0, 0, 0.75);
+
+    font-family: inherit;
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+/* ---------- メイン ---------- */
+
+.skills-page .skills-main {
+    flex: 1;
+
+    box-sizing: border-box;
+    width: 100%;
+
+    padding: 40px 20px 80px;
+}
+
+.skills-page .skills-container {
+    width: 960px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* ---------- 月選択 ---------- */
+
+.skills-page .month-select-area {
+    margin-bottom: 40px;
+}
+
+.skills-page .month-select {
+    box-sizing: border-box;
+
+    min-width: 80px;
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+    color: #222222;
+
+    font-family: inherit;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+/* ---------- フッター ---------- */
+
+.skills-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 18px;
+}
+
+/* ---------- 項目一覧：スキルカード ---------- */
+
+.skills-page .skill-card {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 30px;
+    padding: 28px 30px 34px;
+
+    border: 1px solid #999999;
+    border-radius: 4px;
+
+    background-color: #ffffff;
+}
+
+/* カード上部 */
+.skills-page .skill-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+/* 「バックエンド」 */
+.skills-page .skill-card-header h2 {
+    position: relative;
+
+    margin: 0;
+    padding-bottom: 10px;
+
+    color: #333333;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* タイトル下の線 */
+.skills-page .skill-card-header h2::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 170px;
+
+    border-bottom: 1px solid #777777;
+}
+
+/* 項目を追加するボタン */
+.skills-page .add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    width: 180px;
+    height: 46px;
+
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.skills-page .add-button:hover {
+    opacity: 0.85;
+}
+
+/* ---------- 項目一覧：テーブル ---------- */
+
+.skills-page .skill-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* 見出し・セル */
+.skills-page .skill-table th,
+.skills-page .skill-table td {
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* 見出し */
+.skills-page .skill-table th {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* 項目名 */
+.skills-page .skill-table td:first-child {
+    font-size: 15px;
+    color: #333333;
+}
+
+/* 列幅 */
+.skills-page .skill-table th:nth-child(1),
+.skills-page .skill-table td:nth-child(1) {
+    width: 25%;
+}
+
+.skills-page .skill-table th:nth-child(2),
+.skills-page .skill-table td:nth-child(2) {
+    width: 25%;
+}
+
+.skills-page .skill-table th:nth-child(3),
+.skills-page .skill-table td:nth-child(3) {
+    width: 30%;
+}
+
+.skills-page .skill-table th:nth-child(4),
+.skills-page .skill-table td:nth-child(4) {
+    width: 20%;
+}
+
+/* 学習時間入力欄 */
+.skills-page .skill-table input[type="number"] {
+    box-sizing: border-box;
+    width: 140px;
+    height: 38px;
+
+    padding: 0 12px;
+
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+
+    background-color: #ffffff;
+    color: #555555;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* 保存ボタン */
+.skills-page .save-button {
+    box-sizing: border-box;
+    min-width: 170px;
+    height: 38px;
+
+    padding: 0 14px;
+
+    border: 1px solid #1b5678;
+    border-radius: 3px;
+
+    background-color: #ffffff;
+    color: #1b5678;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+/* 削除ボタン */
+.skills-page .delete-button {
+    box-sizing: border-box;
+    width: 90px;
+    height: 38px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 3px;
+
+    background-color: #f06464;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.skills-page .save-button:hover,
+.skills-page .delete-button:hover {
+    opacity: 0.85;
+}
+
+/* ==========================
+   スキル一覧スクロール
+========================== */
+
+.skill-table-wrapper {
+    width: 100%;
+}
+
+/* =========================
+   skills page
+========================= */
+
+.skills-page {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  background: #fff;
+}
+
+.skills-main {
+  width: 100%;
+  padding: 40px 0 80px;
+}
+
+/* ==========================
+   月選択プルダウン
+========================== */
+
+.month-select-area {
+  width: calc(100% - 40px);
+  max-width: 960px;
+  margin: 48px auto;
+  box-sizing: border-box;
+}
+
+.month-select-area form {
+  position: relative;
+  width: 94px;
+}
+
+.month-select {
+   box-sizing: border-box;
+
+    width: 94px;
+    height: 44px;
+
+    padding: 8px 32px 8px 16px;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: #000;
+    background-color: #fff;
+
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    /* ブラウザ標準の矢印を消す */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Figmaに近い▼ */
+.month-select-area form::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    right: 16px;
+
+    width: 0;
+    height: 0;
+
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 9px solid #000;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
+}
+
+/* カテゴリカード */
+.skill-card {
+  box-sizing: border-box;
+  width: 960px;
+  min-height: 460px;
+  padding: 40px;
+  margin-bottom: 80px;
+
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* タイトル + 追加ボタン */
+.skill-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 880px;
+  min-height: 48px;
+  margin-bottom: 32px;
+}
+
+.skill-card-header h2 {
+  width: 240px;
+  margin: 0;
+  padding-bottom: 16px;
+
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.75);
+
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+/* 項目を追加する */
+.add-button {
+  width: 178px;
+  height: 48px;
+
+  border: none;
+  border-radius: 4px;
+  background: #1b5678;
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* テーブル */
+.skill-table {
+  width: 880px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* ヘッダー */
+.skill-table thead tr {
+  height: 56px;
+}
+
+.skill-table th {
+  height: 56px;
+  padding: 16px;
+
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* 列幅 */
+.skill-table th:nth-child(1),
+.skill-table td:nth-child(1) {
+  width: 240px;
+  box-sizing: border-box;
+  padding-left: 40px;
+}
+
+.skill-table th:nth-child(2) {
+  width: 240px;
+}
+
+.skill-table th:nth-child(3) {
+  width: 200px;
+}
+
+.skill-table th:nth-child(4) {
+  width: 200px;
+}
+
+/* 行 */
+.skill-table tbody tr {
+  height: 72px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.skill-table td {
+  height: 72px;
+  padding: 16px;
+  box-sizing: border-box;
+
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+/* skill名 */
+.skill-table td:first-child {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* 現在のHTMLではフォームが3列分を使っているため */
+.skill-table td[colspan="3"] {
+  padding: 0;
+}
+
+/* 保存フォーム */
+.skill-save-form {
+  display: grid;
+  grid-template-columns: 240px 200px 200px;
+  align-items: center;
+  height: 72px;
+}
+
+/* 学習時間 */
+.skill-save-form input[type="number"] {
+  box-sizing: border-box;
+  width: 160px;
+  height: 40px;
+  margin-left: 0;
+  padding: 0 12px;
+
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  background: #fff;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* 保存ボタン */
+.save-button {
+  box-sizing: border-box;
+  width: 158px;
+  height: 32px;
+
+  padding: 8px 16px;
+
+  border: 1px solid #1b5678;
+  border-radius: 4px;
+  background: #fff;
+  color: #1b5678;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+/* 削除ボタン */
+.delete-button {
+  box-sizing: border-box;
+  width: 88px;
+  height: 32px;
+
+  padding: 8px 16px;
+
+  border: none;
+  border-radius: 4px;
+  background: #ee6969;
+  color: #fff;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+/* フッターとの余白調整 */
+.skill-card:last-child {
+  margin-bottom: 0;
+}
+
+/* ボタンのフォーカス時に変な黒枠が出る場合 */
+.add-button:focus,
+.save-button:focus,
+.delete-button:focus,
+.month-select:focus,
+.skill-save-form input[type="number"]:focus {
+  outline: none;
+}
+
+/* =========================================
+   skills.html WF 最終調整
+========================================= */
+
+/* ==========================
+   カテゴリカード
+========================== */
+
+.skill-card {
+    width: 960px;
+    max-width: 100%;
+    min-height: 436px;
+
+    box-sizing: border-box;
+    padding: 40px;
+    margin-bottom: 80px;
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    background-color: #fff;
+
+    overflow: hidden;
+}
+
+
+/* ==========================
+   タイトル + 追加ボタン
+========================== */
+
+.skill-card-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 24px;
+    margin-bottom: 32px;
+
+    box-sizing: border-box;
+}
+
+
+/* タイトル */
+.skill-card-header h2 {
+    position: relative;
+
+    display: inline-block;
+
+    min-width: 240px;
+    width: fit-content;
+
+    margin: 0;
+    padding-bottom: 16px;
+
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+
+    white-space: nowrap;   /* ← 折り返し禁止 */
+
+    border-bottom: none;
+}
+
+
+/* 項目追加ボタン */
+.add-button {
+    width: 178px;
+    height: 48px;
+
+    flex: 0 0 178px;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #1b5678;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 400;
+
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+
+/* ==========================
+   テーブル
+========================== */
+
+.skill-table-wrapper {
+    width: 100%;
+
+    /* スクロールさせない */
+    max-height: none;
+    overflow: visible;
+
+    /* WFのテーブル部分 */
+    background-color: #fff;
+
+    box-shadow:
+        0 1px 5px rgba(0, 0, 0, 0.12),
+        0 2px 2px rgba(0, 0, 0, 0.14);
+
+    box-sizing: border-box;
+}
+
+
+.skill-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    background-color: #fff;
+
+    /* テーブル自体の外枠は不要 */
+    border: none;
+    box-shadow: none;
+}
+
+
+/* ヘッダー */
+.skill-table thead {
+    border: none;
+}
+
+
+.skill-table thead tr {
+    height: 56px;
+}
+
+
+.skill-table th {
+    height: 56px;
+
+    padding: 16px;
+
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+
+    box-sizing: border-box;
+}
+
+
+/* 行 */
+.skill-table tbody tr {
+    height: 72px;
+}
+
+
+.skill-table td {
+    height: 72px;
+
+    padding: 16px;
+
+    font-size: 14px;
+
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+
+/* 項目名 */
+.skill-table th:first-child,
+.skill-table td:first-child {
+    width: 240px;
+    padding-left: 40px;
+}
+
+
+/* 学習時間 */
+.skill-table th:nth-child(2) {
+    width: 240px;
+}
+
+
+/* 数値入力 */
+.skill-table input[type="number"] {
+    width: 160px;
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+}
+
+
+/* 保存ボタン */
+.save-button {
+    min-width: 158px;
+    height: 32px;
+
+    padding: 8px 16px;
+
+    border: 1px solid #1b5678;
+    border-radius: 4px;
+
+    background-color: #fff;
+    color: #1b5678;
+
+    font-size: 14px;
+    white-space: nowrap;
+
+    box-sizing: border-box;
+}
+
+
+/* 削除ボタン */
+.delete-button {
+    width: 88px;
+    height: 32px;
+
+    padding: 8px 16px;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #ee6969;
+    color: #fff;
+
+    font-size: 14px;
+    white-space: nowrap;
+
+    box-sizing: border-box;
+}
+
+.skills-container {
+    width: calc(100% - 40px);
+    max-width: 960px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.skill-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* ==========================
+   開発者ツールを開いた時など
+   横幅が狭い場合
+========================== */
+
+@media (max-width: 1000px) {
+
+    .skills-container {
+        width: calc(100% - 32px);
+        max-width: none;
+    }
+
+    .skill-card {
+        width: 100%;
+    }
+
+    .skill-card-header {
+        width: 100%;
+    }
+
+    .add-button {
+        flex-shrink: 0;
+    }
+}
+
+
+/* さらに狭くなった場合 */
+@media (max-width: 700px) {
+
+    .skill-card {
+        padding: 24px;
+    }
+
+    .skill-card-header {
+        flex-wrap: wrap;
+    }
+
+    .add-button {
+        margin-left: auto;
+    }
+
+    .skill-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .skill-table {
+        min-width: 760px;
+    }
+}
+
+/* ==========================
+   スキルカード見出し
+   WFに合わせる
+========================== */
+
+.skills-page .skill-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.skills-page .skill-card-header h2 {
+    position: relative;
+
+    width: 240px;
+    max-width: 240px;
+
+    margin: 0;
+
+    padding: 0 0 16px 0;
+
+    font-family: Roboto, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: #333333;
+
+    /* 古い下線を消す */
+    border-bottom: none;
+}
+
+/* 見本と同じ1本だけの下線 */
+.skills-page .skill-card-header h2::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 240px;
+
+    border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================
+   画面右側の余白対策
+========================== */
+
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.skills-page {
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.skills-header,
+.skills-footer {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.skills-main {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================
+   skillsページ 横はみ出し対策
+========================== */
+
+.skills-page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.skills-main {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.skills-container {
+    width: calc(100% - 40px);
+    max-width: 960px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* 月選択 */
+.skills-page .month-select-area {
+    width: 100%;
+    max-width: 960px;
+    margin: 48px auto;
+    box-sizing: border-box;
+}
+
+/* カテゴリカード */
+.skills-page .skill-card {
+    width: 100%;
+    max-width: 960px;
+    box-sizing: border-box;
+}
+
+/* =========================
+   項目追加画面
+========================= */
+
+.new-skill-page {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: Roboto, sans-serif;
+}
+
+
+/* メイン領域 */
+.new-skill-main {
+    flex: 1;
+    width: 100%;
+}
+
+
+/* Figma：フォーム幅480px */
+.new-skill-container {
+    width: 480px;
+    margin: 0 auto;
+    padding-top: 80px;
+    padding-bottom: 120px;
+}
+
+
+/* 「バックエンドに項目を追加」 */
+.new-skill-title {
+    margin: 0 0 64px;
+
+    text-align: center;
+
+    font-family: Roboto, sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 48px;
+
+    color: rgba(0, 0, 0, 0.75);
+}
+
+
+/* フォーム全体 */
+.new-skill-form {
+    width: 480px;
+}
+
+
+/* 各入力欄 */
+.new-skill-form-group {
+    width: 480px;
+    margin-bottom: 48px;
+}
+
+
+/* ラベル */
+.new-skill-form-group label {
+    display: block;
+
+    margin: 0;
+
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12px;
+
+    color: rgba(0, 0, 0, 0.54);
+}
+
+
+/* 入力欄 */
+.new-skill-input {
+    display: block;
+
+    width: 480px;
+    height: 36px;
+
+    box-sizing: border-box;
+
+    padding: 0;
+
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+
+    border-radius: 0;
+
+    background: transparent;
+
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+
+    color: rgba(0, 0, 0, 0.87);
+
+    outline: none;
+}
+
+
+/* フォーカス時も余計な枠を出さない */
+.new-skill-input:focus {
+    outline: none;
+}
+
+
+/* 「分単位で入力してください」 */
+.new-skill-helper {
+    margin: 3px 0 0;
+
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+
+    color: rgba(0, 0, 0, 0.54);
+}
+
+
+/* 追加するボタン */
+.new-skill-submit-button {
+    display: block;
+
+    width: 232px;
+    height: 53px;
+
+    margin: 48px auto 0;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #1B5678;
+    color: #ffffff;
+
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+
+    cursor: pointer;
+}
+
+.add-button {
+    text-decoration: none;
+}
+
+.skills-page .skill-table td form {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.skills-page .skill-table td form input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.skills-page .skill-table td:nth-child(3) {
+    text-align: center;
+}
+
+.skills-page .save-button {
+    display: block;
+    margin: 0 auto;
+}
+
+.new-skill-error {
+    margin: 4px 0 0;
+
+    color: #f44336;
+
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+/* =========================
+   項目追加 登録完了モーダル
+========================= */
+
+.registration-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+/* =========================
+   項目追加完了モーダル
+========================= */
+
+.registration-modal {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+body.new-skill-page {
+    position: relative;
+}
+
+.registration-modal-content {
+    width: 640px;
+    height: 240px;
+    background: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+.registration-modal-message {
+    margin: 0 0 40px;
+    text-align: center;
+
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.registration-modal-button {
+    box-sizing: border-box;
+
+    padding: 16px 40px;
+    min-width: 192px;
+    height: 48px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #1b5678;
+    color: #ffffff;
+
+    border-radius: 4px;
+    text-decoration: none;
+
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+}
+
+/* スキル一覧：3件分の高さでスクロール */
+.skills-page .skill-table-wrapper {
+    width: 100%;
+    height: 272px;
+    overflow-y: auto;
 }
