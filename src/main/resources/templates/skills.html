@@ -78,7 +78,11 @@
                     </thead>
 
                     <tbody>
-
+                    <tr th:if="${#lists.isEmpty(skillList.?[category_name == 'バックエンド'])}">
+    <td colspan="4" class="no-data-message">
+        表示するデータがありません。
+    </td>
+</tr>
                    <tr
     th:each="skill : ${skillList}"
     th:if="${skill.category_name == 'バックエンド'}">
@@ -185,7 +189,11 @@
                     </thead>
 
                     <tbody>
-
+                    <tr th:if="${#lists.isEmpty(skillList.?[category_name == 'フロントエンド'])}">
+    <td colspan="4" class="no-data-message">
+        表示するデータがありません。
+    </td>
+</tr>
                     <tr
     th:each="skill : ${skillList}"
     th:if="${skill.category_name == 'フロントエンド'}">
@@ -292,7 +300,11 @@
                     </thead>
 
                     <tbody>
-
+                    <tr th:if="${#lists.isEmpty(skillList.?[category_name == 'インフラ'])}">
+    <td colspan="4" class="no-data-message">
+        表示するデータがありません。
+    </td>
+</tr>
                     <tr
     th:each="skill : ${skillList}"
     th:if="${skill.category_name == 'インフラ'}">
@@ -376,18 +388,41 @@
 <footer class="skills-footer">
     portfolio site
 </footer>
-<div class="registration-modal"
+
+<div class="update-complete-modal"
      th:if="${updateComplete}">
 
-    <div class="registration-modal-content">
+    <div class="update-complete-modal-content">
 
-        <p class="registration-modal-message">
+        <p class="update-complete-modal-message">
             <span th:text="${updatedSkillName}"></span>
             の学習時間を保存しました！
         </p>
 
-        <a class="registration-modal-button"
+        <a class="update-complete-modal-button"
            th:href="@{/skills(month=${selectedMonth})}">
+            編集ページに戻る
+        </a>
+
+    </div>
+
+</div>
+
+<!-- 項目削除完了モーダル -->
+<div
+    class="delete-complete-modal"
+    th:if="${deleteComplete}">
+
+    <div class="delete-complete-modal-content">
+
+        <p class="delete-complete-modal-message">
+            <span th:text="${deletedSkillName}">項目名</span>
+            を削除しました！
+        </p>
+
+        <a
+            class="delete-complete-modal-button"
+            th:href="@{/skills(month=${selectedMonth})}">
             編集ページに戻る
         </a>
 
