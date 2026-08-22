@@ -871,10 +871,6 @@ body > main {
     width: 125px;
 }
 
-.chart-area {
-    height: 230px;
-}
-
 /* 自己紹介編集画面 */
 .edit-profile-main {
     padding-top: 38px;
@@ -1207,14 +1203,6 @@ body > main {
     cursor: pointer;
 }
 
-.top-page .chart-section {
-    box-sizing: border-box;
-    width: 960px;
-    max-width: 100%;
-    margin: 80px auto 0;
-    text-align: center;
-}
-
 .top-page .chart-section h2 {
     margin: 0;
     color: #333333;
@@ -1250,15 +1238,26 @@ body > main {
 
 .top-page .chart-area {
     box-sizing: border-box;
-    width: 800px;
-    max-width: 100%;
-    height: 420px;
-    margin: 60px auto 0;
-    padding-top: 24px;
-    border: 1px solid #eeeeee;
+
+    width: 1081px;
+    max-width: 1081px;
+    height: 533px;
+
+    margin: 48px auto 0;
+
+    padding: 0;
+    border: none;
+
+    position: relative;
+
     color: #555555;
     font-size: 14px;
     text-align: center;
+}
+
+.top-page .chart-section .chart-area {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .top-page > footer {
@@ -3162,4 +3161,46 @@ body.new-skill-page {
     width: 100%;
     height: 272px;
     overflow-y: auto;
+}
+
+/* ===== TOPページ 横幅崩れ対策 ===== */
+
+html,
+body.top-page {
+    width: 100%;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.top-page header,
+.top-page main,
+.top-page footer {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.top-page .chart-section {
+    box-sizing: border-box;
+
+    width: 960px;
+    max-width: 100%;
+
+    margin: 80px auto 0;
+    padding-bottom: 24px;
+    text-align: center;
+}
+
+.top-page .chart-area {
+    box-sizing: border-box;
+
+    width: 800px;
+    max-width: calc(100% - 64px);
+    height: 395px;
+
+    margin: 32px auto 0;
+    padding: 0;
+
+    position: relative;
 }

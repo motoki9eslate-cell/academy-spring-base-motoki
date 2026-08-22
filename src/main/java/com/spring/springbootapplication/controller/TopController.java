@@ -43,25 +43,190 @@ public String top(HttpSession session, Model model) {
 
     try {
         Map<String, Object> user = jdbcTemplate.queryForMap(
-    """
-    SELECT
-        name,
-        email,
-        introduction,
-        image_data
-    FROM users
-    WHERE email = ?
-    """,
-    loginUserEmail
-);
+                """
+                SELECT
+                    id,
+                    name,
+                    email,
+                    introduction,
+                    image_data
+                FROM users
+                WHERE email = ?
+                """,
+                loginUserEmail
+        );
 
         model.addAttribute("loginUser", user);
-       boolean hasProfileImage = user.get("image_data") != null;
-model.addAttribute("hasProfileImage", hasProfileImage);
+
+        boolean hasProfileImage =
+                user.get("image_data") != null;
+
+        model.addAttribute(
+                "hasProfileImage",
+                hasProfileImage
+        );
+
+
+        Integer userId =
+                ((Number) user.get("id"))
+                        .intValue();
+
+
+        LocalDate thisMonth =
+                LocalDate.now()
+                        .withDayOfMonth(1);
+
+        LocalDate lastMonth =
+                thisMonth.minusMonths(1);
+
+        LocalDate twoMonthsAgo =
+                thisMonth.minusMonths(2);
+
+
+        List<Integer> backendData =
+                new ArrayList<>(
+                        List.of(0, 0, 0)
+                );
+
+        List<Integer> frontendData =
+                new ArrayList<>(
+                        List.of(0, 0, 0)
+                );
+
+        List<Integer> infrastructureData =
+                new ArrayList<>(
+                        List.of(0, 0, 0)
+                );
+
+
+        List<Map<String, Object>> chartData =
+                jdbcTemplate.queryForList(
+                        """
+                        SELECT
+                            c.name AS category_name,
+                            ld.learning_month,
+                            SUM(ld.learning_minutes)
+                                AS total_minutes
+                        FROM learning_data ld
+                        JOIN skills s
+                            ON ld.skill_id = s.id
+                        JOIN categories c
+                            ON s.category_id = c.id
+                        WHERE ld.user_id = ?
+                          AND ld.learning_month
+                              IN (?, ?, ?)
+                        GROUP BY
+                            c.name,
+                            ld.learning_month,
+                            c.id
+                        ORDER BY
+                            ld.learning_month,
+                            c.id
+                        """,
+                        userId,
+                        twoMonthsAgo,
+                        lastMonth,
+                        thisMonth
+                );
+
+
+        for (Map<String, Object> row : chartData) {
+
+            String categoryName =
+                    (String) row.get(
+                            "category_name"
+                    );
+
+            LocalDate learningMonth =
+                    ((java.sql.Date) row.get(
+                            "learning_month"
+                    )).toLocalDate();
+
+            int totalMinutes =
+                    ((Number) row.get(
+                            "total_minutes"
+                    )).intValue();
+
+
+            int monthIndex;
+
+            if (learningMonth.equals(
+                    twoMonthsAgo
+            )) {
+
+                monthIndex = 0;
+
+            } else if (learningMonth.equals(
+                    lastMonth
+            )) {
+
+                monthIndex = 1;
+
+            } else if (learningMonth.equals(
+                    thisMonth
+            )) {
+
+                monthIndex = 2;
+
+            } else {
+
+                continue;
+            }
+
+
+            if ("バックエンド".equals(
+                    categoryName
+            )) {
+
+                backendData.set(
+                        monthIndex,
+                        totalMinutes
+                );
+
+            } else if ("フロントエンド".equals(
+                    categoryName
+            )) {
+
+                frontendData.set(
+                        monthIndex,
+                        totalMinutes
+                );
+
+            } else if ("インフラ".equals(
+                    categoryName
+            )) {
+
+                infrastructureData.set(
+                        monthIndex,
+                        totalMinutes
+                );
+            }
+        }
+
+
+        model.addAttribute(
+                "backendData",
+                backendData
+        );
+
+        model.addAttribute(
+                "frontendData",
+                frontendData
+        );
+
+        model.addAttribute(
+                "infrastructureData",
+                infrastructureData
+        );
+
+
     } catch (EmptyResultDataAccessException e) {
+
         session.invalidate();
+
         return "redirect:/login";
     }
+
 
     return "top";
 }

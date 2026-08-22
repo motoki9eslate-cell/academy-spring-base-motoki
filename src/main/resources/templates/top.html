@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/top.css">
   <title>TOP</title>
 </head>
-<body class="top-page"></body>
+<body class="top-page">
   <header>
     <h1>My Portfolio</h1>
      <form action="/logout" method="post" class="logout-form">
@@ -70,11 +70,129 @@
 </a>
 
       <div class="chart-area">
-        Chart.js Bar Chart
-      </div>
+  <canvas id="learningChart"></canvas>
+</div>
     </section>
   </main>
 
   <footer>portfolio site</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script th:inline="javascript">
+  const backendData =
+      /*[[${backendData}]]*/ [0, 0, 0];
+
+  const frontendData =
+      /*[[${frontendData}]]*/ [0, 0, 0];
+
+  const infrastructureData =
+      /*[[${infrastructureData}]]*/ [0, 0, 0];
+
+  const allData = [
+      ...backendData,
+      ...frontendData,
+      ...infrastructureData
+  ];
+
+  const maxValue = Math.max(...allData);
+
+  const yMax = Math.max(
+      100,
+      Math.ceil(maxValue / 10) * 10
+  );
+
+  const ctx =
+      document.getElementById('learningChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+
+    data: {
+      labels: [
+        '先々月',
+        '先月',
+        '今月'
+      ],
+
+      datasets: [
+  {
+    label: 'バックエンド',
+    data: backendData,
+    backgroundColor: 'rgba(255, 153, 178, 0.8)',
+    barThickness: 60
+  },
+  {
+    label: 'フロントエンド',
+    data: frontendData,
+    backgroundColor: 'rgba(255, 190, 130, 0.8)',
+    barThickness: 60
+  },
+  {
+    label: 'インフラ',
+    data: infrastructureData,
+    backgroundColor: 'rgba(255, 220, 145, 0.8)',
+    barThickness: 60
+  }
+]
+    },
+
+    options: {
+  responsive: true,
+  maintainAspectRatio: false,
+  animation: false,
+
+  plugins: {
+        title: {
+          display: true,
+          text: 'Chart.js Bar Chart',
+          font: {
+            family: 'Roboto',
+            size: 14
+          }
+        },
+
+        legend: {
+          position: 'top',
+          labels: {
+            font: {
+              family: 'Roboto',
+              size: 14
+            }
+          }
+        }
+      },
+
+      scales: {
+        x: {
+          ticks: {
+            font: {
+              family: 'Roboto',
+              size: 14
+            }
+          }
+        },
+
+        y: {
+          beginAtZero: true,
+          max: yMax,
+
+          ticks: {
+            stepSize:
+                yMax === 100
+                    ? 10
+                    : undefined,
+
+            font: {
+              family: 'Roboto',
+              size: 14
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
