@@ -13,7 +13,9 @@
 <body class="skills-page">
 
 <header class="skills-header">
-    <h1>My Portfolio</h1>
+    <h1>
+    <a th:href="@{/}" class="header-logo">My Portfolio</a>
+</h1>
 
     <form th:action="@{/logout}" method="post">
         <button type="submit" class="skills-logout-button">
@@ -64,7 +66,8 @@
 
             </div>
 
-            <div class="skill-table-wrapper">
+            <div class="skills-table-wrapper"
+     th:classappend="${#lists.size(skillList.?[category_name == 'バックエンド']) > 3} ? ' scrollable' : ''">
 
                 <table class="skill-table">
 
@@ -175,7 +178,8 @@
 
             </div>
 
-            <div class="skill-table-wrapper">
+            <div class="skills-table-wrapper"
+     th:classappend="${#lists.size(skillList.?[category_name == 'フロントエンド']) > 3} ? ' scrollable' : ''">
 
                 <table class="skill-table">
 
@@ -286,7 +290,8 @@
 
             </div>
 
-            <div class="skill-table-wrapper">
+             <div class="skills-table-wrapper"
+     th:classappend="${#lists.size(skillList.?[category_name == 'インフラ']) > 3} ? ' scrollable' : ''">
 
                 <table class="skill-table">
 

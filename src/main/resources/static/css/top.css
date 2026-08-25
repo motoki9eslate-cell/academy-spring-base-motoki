@@ -3157,12 +3157,6 @@ body.new-skill-page {
     color: #666;
 }
 
-.skills-page .skill-table-wrapper {
-    width: 100%;
-    height: 272px;
-    overflow-y: auto;
-}
-
 /* ===== TOPページ 横幅崩れ対策 ===== */
 
 html,
@@ -3203,4 +3197,20 @@ body.top-page {
     padding: 0;
 
     position: relative;
+}
+
+.skills-page .skills-table-wrapper {
+    width: 100%;
+    overflow-y: visible;
+}
+
+/* 4項目以上の場合だけスクロール */
+.skills-page .skills-table-wrapper.scrollable {
+    height: 272px;
+    overflow-y: auto;
+}
+
+.header-logo {
+    color: inherit;
+    text-decoration: none;
 }
