@@ -7,22 +7,23 @@
 
   <!-- Roboto -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/top.css">
 
   <title>TOP</title>
 </head>
 <body class="top-page">
-  <header>
+  <header class="common-header">
     <h1>
-        <a th:href="@{/}" class="header-logo">My Portfolio</a>
+        <a th:href="@{/}" class="common-header-logo">
+            My Portfolio
+        </a>
     </h1>
 
-    <form action="/logout" method="post" class="logout-form">
-        <button type="submit" class="logout-button">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="common-header-button">
             ログアウト
         </button>
     </form>

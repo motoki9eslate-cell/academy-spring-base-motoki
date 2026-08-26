@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
+<!-- Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{/css/top.css}">
@@ -9,13 +14,17 @@
 
 <body class="auth-page">
 
-  <header class="auth-header has-button">
-    <h1>My Portfolio</h1>
+  <header class="common-header">
+    <h1>
+        <a th:href="@{/}" class="common-header-logo">
+            My Portfolio
+        </a>
+    </h1>
 
-    <a th:href="@{/login}" class="auth-header-button">
-      ログイン
+    <a th:href="@{/login}" class="common-header-button">
+        ログイン
     </a>
-  </header>
+</header>
 
   <main class="auth-main">
     <h2 class="auth-title">新規登録</h2>
