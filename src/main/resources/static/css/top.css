@@ -3213,4 +3213,32 @@ body.top-page {
 .header-logo {
     color: inherit;
     text-decoration: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* =========================
+   ヘッダーロゴ 最終共通化
+========================= */
+
+.top-page > header h1,
+.skills-header h1,
+.edit-profile-page .header h1,
+.auth-header h1 {
+    margin: 0;
+    color: #ffffff;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.header-logo {
+    color: #ffffff;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
 }

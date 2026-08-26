@@ -17,13 +17,16 @@
 </head>
 <body class="top-page">
   <header>
-    <h1>My Portfolio</h1>
-     <form action="/logout" method="post" class="logout-form">
-    <button type="submit" class="logout-button">
-      ログアウト
-    </button>
-  </form>
-  </header>
+    <h1>
+        <a th:href="@{/}" class="header-logo">My Portfolio</a>
+    </h1>
+
+    <form action="/logout" method="post" class="logout-form">
+        <button type="submit" class="logout-button">
+            ログアウト
+        </button>
+    </form>
+</header>
 
   <main>
     <section class="profile-section">
