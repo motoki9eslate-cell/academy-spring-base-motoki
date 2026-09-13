@@ -15,26 +15,6 @@ header {
   padding: 0 40px;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 28px;
-}
-
-.header-login-button {
-  width: 90px;
-  height: 40px;
-  background: white;
-  color: #000;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  box-sizing: border-box;
-}
-
 main {
    padding-top: 80px;
     min-height: calc(100vh - 120px);
@@ -151,22 +131,6 @@ footer {
 }
 
 /* ログイン画面のヘッダー */
-.login-page header {
-  height: 120px;
-  padding: 0 40px;
-  background: #1B5678;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  flex-shrink: 0;
-}
-
-.login-page header h1 {
-  margin: 0;
-  font-size: 28px;
-}
 
 /* ログイン画面のメイン */
 .login-page main {
@@ -310,34 +274,8 @@ footer {
     flex-direction: column;
 }
 
-.edit-profile-page .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 120px;
-    padding: 0 48px;
-    background-color: #1b5f82;
-}
-
-.edit-profile-page .header h1 {
-    margin: 0;
-    color: #ffffff;
-    font-size: 32px;
-}
-
 .edit-profile-page .header form {
     margin: 0;
-}
-
-.edit-profile-page .header button {
-    width: 130px;
-    height: 42px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    background-color: #ffffff;
-    cursor: pointer;
 }
 
 .edit-profile-main {
@@ -507,32 +445,6 @@ header,
     background-color: #1b5f82;
 }
 
-header h1,
-.edit-profile-page .header h1 {
-    margin: 0;
-    color: #ffffff;
-    font-size: 32px;
-    font-weight: bold;
-}
-
-/* ログアウトボタン */
-.logout-button,
-.edit-profile-page .header button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 130px;
-    height: 42px;
-    padding: 0;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    background-color: #ffffff;
-    color: #333333;
-    font-size: 14px;
-    cursor: pointer;
-}
-
 /* 見出し・タイトル */
 .edit-profile-main h2 {
     color: #333333;
@@ -614,35 +526,9 @@ header,
     background-color: #1b5678;
 }
 
-header h1,
-.edit-profile-page .header h1 {
-    margin: 0;
-    color: #ffffff;
-    font-size: 28px;
-    font-weight: bold;
-}
-
 .logout-form,
 .edit-profile-page .header form {
     margin: 0;
-}
-
-.logout-button,
-.edit-profile-page .header button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 90px;
-    height: 40px;
-    padding: 0;
-    border: none;
-    border-radius: 4px;
-    background-color: #ffffff;
-    color: #333333;
-    font-size: 13px;
-    font-family: inherit;
-    cursor: pointer;
 }
 
 footer,
@@ -846,22 +732,6 @@ body > main {
     color:#333;
 }
 
-/* ログアウトボタン */
-.logout-button,
-.edit-profile-page .header button {
-    width: 90px;
-    height: 34px;
-    padding: 0;
-    border: none;
-    border-radius: 3px;
-    background-color: #ffffff;
-    color: #333333;
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: normal;
-    line-height: 1;
-}
-
 .profile-right {
     width: 290px;
     padding-top: 15px;
@@ -869,10 +739,6 @@ body > main {
 
 .profile-right .line {
     width: 125px;
-}
-
-.chart-area {
-    height: 230px;
 }
 
 /* 自己紹介編集画面 */
@@ -900,40 +766,6 @@ body > main {
     flex-direction: column;
     background-color: #ffffff;
     font-family: sans-serif;
-}
-
-/* 共通ヘッダー */
-.auth-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    width: 100%;
-    height: 120px;
-    min-height: 80px;
-    padding: 0 40px;
-    background-color: #1b5678;
-}
-
-.auth-header h1 {
-    margin: 0;
-    color: #ffffff;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.auth-header-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 90px;
-    height: 34px;
-    border-radius: 3px;
-    background-color: #ffffff;
-    color: #333333;
-    font-size: 11px;
-    text-decoration: none;
 }
 
 /* メイン */
@@ -1032,14 +864,6 @@ body > main {
     font-size: 14px;
 }
 
-.login-header {
-    justify-content: center;
-}
-
-.login-header h1 {
-    margin: 0;
-}
-
 /* TOPページ専用 */
 
 .top-page {
@@ -1049,27 +873,6 @@ body > main {
     margin: 0;
     font-family: Roboto, Arial, sans-serif;
     background-color: #ffffff;
-}
-
-.top-page > header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    width: 100%;
-    height: 120px;
-    min-height: 120px;
-    padding: 0 40px;
-    background-color: #1b5678;
-}
-
-.top-page > header h1 {
-    margin: 0;
-    color: #ffffff;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 1;
 }
 
 .top-page .logout-form {
@@ -1207,14 +1010,6 @@ body > main {
     cursor: pointer;
 }
 
-.top-page .chart-section {
-    box-sizing: border-box;
-    width: 960px;
-    max-width: 100%;
-    margin: 80px auto 0;
-    text-align: center;
-}
-
 .top-page .chart-section h2 {
     margin: 0;
     color: #333333;
@@ -1250,15 +1045,26 @@ body > main {
 
 .top-page .chart-area {
     box-sizing: border-box;
-    width: 800px;
-    max-width: 100%;
-    height: 420px;
-    margin: 60px auto 0;
-    padding-top: 24px;
-    border: 1px solid #eeeeee;
+
+    width: 1081px;
+    max-width: 1081px;
+    height: 533px;
+
+    margin: 48px auto 0;
+
+    padding: 0;
+    border: none;
+
+    position: relative;
+
     color: #555555;
     font-size: 14px;
     text-align: center;
+}
+
+.top-page .chart-section .chart-area {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .top-page > footer {
@@ -1292,54 +1098,8 @@ body > main {
 
 /* ---------- ヘッダー ---------- */
 
-.edit-profile-page .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-
-    box-sizing: border-box;
-    width: 100%;
-    height: 120px;
-    min-height: 120px;
-    padding: 0 40px;
-
-    background-color: #1b5678;
-}
-
-.edit-profile-page .header h1 {
-    margin: 0;
-    color: #ffffff;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 1;
-}
-
 .edit-profile-page .header form {
     margin: 0;
-}
-
-.edit-profile-page .header button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: border-box;
-    width: 170px;
-    height: 53px;
-    padding: 0;
-
-    border: none;
-    border-radius: 4px;
-
-    background-color: #ffffff;
-    color: rgba(0, 0, 0, 0.75);
-
-    font-family: inherit;
-    font-size: 18px;
-    font-weight: 400;
-
-    cursor: pointer;
 }
 
 /* ---------- メイン ---------- */
@@ -1486,21 +1246,6 @@ body > main {
 /* ---------- 画面幅が狭い場合 ---------- */
 
 @media screen and (max-width: 900px) {
-    .edit-profile-page .header {
-        height: 90px;
-        min-height: 90px;
-        padding: 0 24px;
-    }
-
-    .edit-profile-page .header h1 {
-        font-size: 28px;
-    }
-
-    .edit-profile-page .header button {
-        width: 120px;
-        height: 44px;
-        font-size: 15px;
-    }
 
     .edit-profile-main {
         padding: 60px 20px;
@@ -1535,57 +1280,10 @@ body > main {
 
 /* ---------- ヘッダー ---------- */
 
-.auth-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-
-    box-sizing: border-box;
-    width: 100%;
-    height: 120px;
-    min-height: 120px;
-    padding: 0 40px;
-
-    background-color: #1b5678;
-}
-
-.auth-header h1 {
-    margin: 0;
-    color: #ffffff;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 1;
-}
-
 /* 新規登録ページだけ右側にログインボタンを置く */
 .auth-header.has-button {
     justify-content: space-between;
 }
-
-.auth-header-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: border-box;
-    width: 170px;
-    height: 53px;
-    padding: 0;
-
-    border: none;
-    border-radius: 4px;
-
-    background-color: #ffffff;
-    color: rgba(0, 0, 0, 0.75);
-
-    font-family: inherit;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1;
-    text-decoration: none;
-}
-
 /* ---------- メイン ---------- */
 
 .auth-main {
@@ -1748,56 +1446,10 @@ body > main {
     background-color: #ffffff;
 }
 
-/* ---------- ヘッダー ---------- */
-
- .skills-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-
-    box-sizing: border-box;
-    width: 100%;
-    height: 120px;
-    padding: 0 40px;
-
-    background-color: #1b5678;
-}
-
-.skills-header h1 {
-    margin: 0;
-
-    color: #ffffff;
-    font-size: 36px;
-    font-weight: 700;
-}
-
 /* ---------- ログアウト ---------- */
 
 .skills-header form {
     margin: 0;
-}
-
-.skills-logout-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: border-box;
-    width: 170px;
-    height: 53px;
-
-    padding: 0;
-    border: none;
-    border-radius: 4px;
-
-    background-color: #ffffff;
-    color: rgba(0, 0, 0, 0.75);
-
-    font-family: inherit;
-    font-size: 18px;
-
-    cursor: pointer;
 }
 
 /* ---------- メイン ---------- */
@@ -3158,8 +2810,124 @@ body.new-skill-page {
     color: #666;
 }
 
-.skills-page .skill-table-wrapper {
+/* ===== TOPページ 横幅崩れ対策 ===== */
+
+html,
+body.top-page {
     width: 100%;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.top-page header,
+.top-page main,
+.top-page footer {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+.top-page .chart-section {
+    box-sizing: border-box;
+
+    width: 960px;
+    max-width: 100%;
+
+    margin: 80px auto 0;
+    padding-bottom: 24px;
+    text-align: center;
+}
+
+.top-page .chart-area {
+    box-sizing: border-box;
+
+    width: 800px;
+    max-width: calc(100% - 64px);
+    height: 395px;
+
+    margin: 32px auto 0;
+    padding: 0;
+
+    position: relative;
+}
+
+.skills-page .skills-table-wrapper {
+    width: 100%;
+    overflow-y: visible;
+}
+
+/* 4項目以上の場合だけスクロール */
+.skills-page .skills-table-wrapper.scrollable {
     height: 272px;
     overflow-y: auto;
+}
+
+/* =========================
+   共通ヘッダー
+========================= */
+
+.common-header {
+    width: 100%;
+    height: 120px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+
+    background-color: #1B5678;
+}
+
+.common-header h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.common-header-logo {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 42px;
+
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* ログイン・ログアウト共通 */
+.common-header-button {
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 53px;
+    padding: 16px 40px;
+    margin: 0;
+
+    background-color: #FFFFFF;
+    color: rgba(0, 0, 0, 0.75);
+
+    border: none;
+    border-radius: 4px;
+
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.common-header form {
+    margin: 0;
 }

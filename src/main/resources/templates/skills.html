@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
+<!-- Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +17,15 @@
 
 <body class="skills-page">
 
-<header class="skills-header">
-    <h1>My Portfolio</h1>
+<header class="common-header">
+    <h1>
+        <a th:href="@{/}" class="common-header-logo">
+            My Portfolio
+        </a>
+    </h1>
 
     <form th:action="@{/logout}" method="post">
-        <button type="submit" class="skills-logout-button">
+        <button type="submit" class="common-header-button">
             ログアウト
         </button>
     </form>
@@ -64,7 +73,8 @@
 
             </div>
 
-            <div class="skill-table-wrapper">
+            <div class="skills-table-wrapper"
+     th:classappend="${#lists.size(skillList.?[category_name == 'バックエンド']) > 3} ? ' scrollable' : ''">
 
                 <table class="skill-table">
 
@@ -108,11 +118,12 @@
                 th:value="${selectedMonth}">
 
             <input
-                type="number"
-                name="learningMinutes"
-                th:value="${skill.learning_minutes}"
-                min="0"
-                step="1">
+    type="number"
+    name="learningMinutes"
+    th:value="${skill.learning_minutes}"
+    min="0"
+    step="1"
+    required>
         </form>
     </td>
 
@@ -175,7 +186,8 @@
 
             </div>
 
-            <div class="skill-table-wrapper">
+            <div class="skills-table-wrapper"
+     th:classappend="${#lists.size(skillList.?[category_name == 'フロントエンド']) > 3} ? ' scrollable' : ''">
 
                 <table class="skill-table">
 
@@ -223,7 +235,8 @@
                 name="learningMinutes"
                 th:value="${skill.learning_minutes}"
                 min="0"
-                step="1">
+                step="1"
+                required>
         </form>
     </td>
 
@@ -286,7 +299,8 @@
 
             </div>
 
-            <div class="skill-table-wrapper">
+             <div class="skills-table-wrapper"
+     th:classappend="${#lists.size(skillList.?[category_name == 'インフラ']) > 3} ? ' scrollable' : ''">
 
                 <table class="skill-table">
 
@@ -334,7 +348,8 @@
                 name="learningMinutes"
                 th:value="${skill.learning_minutes}"
                 min="0"
-                step="1">
+                step="1"
+                required>
         </form>
     </td>
 

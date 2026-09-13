@@ -43,25 +43,190 @@ public String top(HttpSession session, Model model) {
 
     try {
         Map<String, Object> user = jdbcTemplate.queryForMap(
-    """
-    SELECT
-        name,
-        email,
-        introduction,
-        image_data
-    FROM users
-    WHERE email = ?
-    """,
-    loginUserEmail
-);
+                """
+                SELECT
+                    id,
+                    name,
+                    email,
+                    introduction,
+                    image_data
+                FROM users
+                WHERE email = ?
+                """,
+                loginUserEmail
+        );
 
         model.addAttribute("loginUser", user);
-       boolean hasProfileImage = user.get("image_data") != null;
-model.addAttribute("hasProfileImage", hasProfileImage);
+
+        boolean hasProfileImage =
+                user.get("image_data") != null;
+
+        model.addAttribute(
+                "hasProfileImage",
+                hasProfileImage
+        );
+
+
+        Integer userId =
+                ((Number) user.get("id"))
+                        .intValue();
+
+
+        LocalDate thisMonth =
+                LocalDate.now()
+                        .withDayOfMonth(1);
+
+        LocalDate lastMonth =
+                thisMonth.minusMonths(1);
+
+        LocalDate twoMonthsAgo =
+                thisMonth.minusMonths(2);
+
+
+        List<Integer> backendData =
+                new ArrayList<>(
+                        List.of(0, 0, 0)
+                );
+
+        List<Integer> frontendData =
+                new ArrayList<>(
+                        List.of(0, 0, 0)
+                );
+
+        List<Integer> infrastructureData =
+                new ArrayList<>(
+                        List.of(0, 0, 0)
+                );
+
+
+        List<Map<String, Object>> chartData =
+                jdbcTemplate.queryForList(
+                        """
+                        SELECT
+                            c.name AS category_name,
+                            ld.learning_month,
+                            SUM(ld.learning_minutes)
+                                AS total_minutes
+                        FROM learning_data ld
+                        JOIN skills s
+                            ON ld.skill_id = s.id
+                        JOIN categories c
+                            ON s.category_id = c.id
+                        WHERE ld.user_id = ?
+                          AND ld.learning_month
+                              IN (?, ?, ?)
+                        GROUP BY
+                            c.name,
+                            ld.learning_month,
+                            c.id
+                        ORDER BY
+                            ld.learning_month,
+                            c.id
+                        """,
+                        userId,
+                        twoMonthsAgo,
+                        lastMonth,
+                        thisMonth
+                );
+
+
+        for (Map<String, Object> row : chartData) {
+
+            String categoryName =
+                    (String) row.get(
+                            "category_name"
+                    );
+
+            LocalDate learningMonth =
+                    ((java.sql.Date) row.get(
+                            "learning_month"
+                    )).toLocalDate();
+
+            int totalMinutes =
+                    ((Number) row.get(
+                            "total_minutes"
+                    )).intValue();
+
+
+            int monthIndex;
+
+            if (learningMonth.equals(
+                    twoMonthsAgo
+            )) {
+
+                monthIndex = 0;
+
+            } else if (learningMonth.equals(
+                    lastMonth
+            )) {
+
+                monthIndex = 1;
+
+            } else if (learningMonth.equals(
+                    thisMonth
+            )) {
+
+                monthIndex = 2;
+
+            } else {
+
+                continue;
+            }
+
+
+            if ("バックエンド".equals(
+                    categoryName
+            )) {
+
+                backendData.set(
+                        monthIndex,
+                        totalMinutes
+                );
+
+            } else if ("フロントエンド".equals(
+                    categoryName
+            )) {
+
+                frontendData.set(
+                        monthIndex,
+                        totalMinutes
+                );
+
+            } else if ("インフラ".equals(
+                    categoryName
+            )) {
+
+                infrastructureData.set(
+                        monthIndex,
+                        totalMinutes
+                );
+            }
+        }
+
+
+        model.addAttribute(
+                "backendData",
+                backendData
+        );
+
+        model.addAttribute(
+                "frontendData",
+                frontendData
+        );
+
+        model.addAttribute(
+                "infrastructureData",
+                infrastructureData
+        );
+
+
     } catch (EmptyResultDataAccessException e) {
+
         session.invalidate();
+
         return "redirect:/login";
     }
+
 
     return "top";
 }
@@ -605,41 +770,23 @@ public String deleteSkill(
         return "redirect:/skills";
     }
 
-    // 選択した月のデータだけ削除
-    jdbcTemplate.update(
-            """
-            DELETE FROM learning_data
-            WHERE user_id = ?
-              AND skill_id = ?
-              AND learning_month = ?
-            """,
-            userId,
-            skillId,
-            selectedLearningMonth
-    );
+   // このskillに紐づく学習データをすべて削除
+jdbcTemplate.update(
+        """
+        DELETE FROM learning_data
+        WHERE skill_id = ?
+        """,
+        skillId
+);
 
-    // このskillが他の月でも使用されているか確認
-    Integer remainingCount = jdbcTemplate.queryForObject(
-            """
-            SELECT COUNT(*)
-            FROM learning_data
-            WHERE skill_id = ?
-            """,
-            Integer.class,
-            skillId
-    );
-
-    // どの月でも使用されていなければskillsからも削除
-    if (remainingCount != null && remainingCount == 0) {
-
-        jdbcTemplate.update(
-                """
-                DELETE FROM skills
-                WHERE id = ?
-                """,
-                skillId
-        );
-    }
+// skillsから対象項目を物理削除
+jdbcTemplate.update(
+        """
+        DELETE FROM skills
+        WHERE id = ?
+        """,
+        skillId
+);
 
     // 削除完了モーダル用
     redirectAttributes.addFlashAttribute(
