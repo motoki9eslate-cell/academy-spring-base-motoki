@@ -770,41 +770,23 @@ public String deleteSkill(
         return "redirect:/skills";
     }
 
-    // 選択した月のデータだけ削除
-    jdbcTemplate.update(
-            """
-            DELETE FROM learning_data
-            WHERE user_id = ?
-              AND skill_id = ?
-              AND learning_month = ?
-            """,
-            userId,
-            skillId,
-            selectedLearningMonth
-    );
+   // このskillに紐づく学習データをすべて削除
+jdbcTemplate.update(
+        """
+        DELETE FROM learning_data
+        WHERE skill_id = ?
+        """,
+        skillId
+);
 
-    // このskillが他の月でも使用されているか確認
-    Integer remainingCount = jdbcTemplate.queryForObject(
-            """
-            SELECT COUNT(*)
-            FROM learning_data
-            WHERE skill_id = ?
-            """,
-            Integer.class,
-            skillId
-    );
-
-    // どの月でも使用されていなければskillsからも削除
-    if (remainingCount != null && remainingCount == 0) {
-
-        jdbcTemplate.update(
-                """
-                DELETE FROM skills
-                WHERE id = ?
-                """,
-                skillId
-        );
-    }
+// skillsから対象項目を物理削除
+jdbcTemplate.update(
+        """
+        DELETE FROM skills
+        WHERE id = ?
+        """,
+        skillId
+);
 
     // 削除完了モーダル用
     redirectAttributes.addFlashAttribute(
